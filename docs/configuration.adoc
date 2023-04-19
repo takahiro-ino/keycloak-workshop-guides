@@ -62,14 +62,13 @@ From: admin@mysso.com
 
 image::sso_adminemailconfig.png[Realm Email config]
 
-<1> Ensure that you have filled in the `From Display Name`, its not mandatory, but for this workshop if users are sharing emails, it will help alot.
+`save` をクリックします。
 
-Once done making changes `save`. 
+では、早速テストしてみましょう。
+`Test Connection` を押すと、設定がうまくいったかどうかが報告されます。
+成功した場合、「[KEYCLOAK] - SMTP test message」などの件名で、メールが届きます。
 
-Now lets make a quick test. `Test Connection`, once pressed will report back if your configuration was successful. If it is, an email should arrive in your inbox, with a subject e.g. 
-'[KEYCLOAK] - SMTP test message'
-
-Goto the mailcatcher service and you should see something similar.
+OpenShiftコンソールのmailcatcherの右上のアイコンをクリックすると、メールが確認できます。
 
 image::mailcatcher_ui.png[Email config]
 
