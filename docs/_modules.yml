@@ -9,7 +9,7 @@ modules:
   configuration:
     name: Red Hat SSOのメール設定
   firstapp:
-    name: Simple JS Console application
+    name: JavaScript Consoleアプリ
   openidconnect:
     name: Open ID Connect
   usergroups:
