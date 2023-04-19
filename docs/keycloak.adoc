@@ -1,8 +1,9 @@
 [#RH-SSO]
-Red Hat Single Sign-Onのコンテナイメージをインストールを実施します。
+Red Hat SSOのコンテナイメージをインストールを実施します。
 
 [#ssoinstall]
-=== OpenShiftコンソールのログイン
+=== OpenShiftコンソールにログイン
+Red Hat SSOのコンテナイメージは、OpenShiftコンソール上で実施します。
 まず、新規ブラウザで {{ CONSOLE_URL }}[OpenShift web コンソール^] を開きます。
 
 image::openshift_login.png[openshift_login, 700]
@@ -12,46 +13,23 @@ image::openshift_login.png[openshift_login, 700]
 * Username: `{{ USER_ID }}`
 * Password: `openshift`
 
-=== インストール
-Make sure that you have completed the setting up instructions before moving forward in this section. 
+=== Red Hat SSOのインストール
+Red Hat SSOのインストールを実施します。
 
-Lets first take a look at the installed templates:
-Run the following command:
-[source,bash,subs="+macros,+attributes"]
-----
-oc get templates -n openshift -o name | grep -o 'sso75.\+'
-----
-
-Which should result in the following output; these are the list of templates installed on this OpenShift cluster. We could also change the above expression to sso72 and would get the similar output for the SSO 7.2 release templates.
-
-[source,bash,subs="+macros,+attributes"]
-----
-sso75-https
-sso75-ocp4-x509-https
-sso75-ocp4-x509-postgresql-persistent
-sso75-postgresql
-sso75-postgresql-persistent
-----
-
-
-Lets try to install from a template
-But first we want to know the different parameters our template will use. Today we choose a persistent Postgresql backed SSO installation. 
-
-<1> Open the OpenShift console
-
-<2> Click on the button `Add` in the right menu and then > 'Developer Catalog' > 'All services'
-
-<3> search for `SSO`
-
+<1> 右メニューの `Add` をクリックし、 >  'Developer Catalog'   > 'All services’ をクリックします。
+<2> 検索ボックスに`SSO` と入力します。
 
 image::OpenShift-sso_search.png[Search for SSO]
 
-<4> Select the following template `Red Hat Single Sign-On 7.5 on OpenJDK (Ephemeral)` by clicking on it.
+<3>  `Red Hat Single Sign-On 7.5 on OpenJDK (Ephemeral)` をクリックします。
 
-<5> 'Initiate Template'. This will bring you to the Configuration section. 
-All the fields in this section denote the parameters that can be added to this template. Take a look at all the diferent parameters. 
-For now we will only change the SSO Administrator username and password
-I have chosen 'admin/password' feel free to choose any, but make sure you remember them or note them, since we will be using them again. For the realm choose 'demojs' as shown in the image.
+<4> 'Initiate Template' をクリックします。これにより、'Configuration' 画面が表示されます。
+この画面では、Red Hat SSOに設定できる初期パラメータを表しています。
+ここでは、以下の３点を入力します。
+RH-SSO Administrator Username: admin
+RH-SSO Administrator Password: password
+RH-SSO Realm: demojs
+
 
 image::sso_install.png[SSO install Config]
 
