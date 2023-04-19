@@ -2,7 +2,7 @@
 == ワークショップを始める前に、ワークショップの環境確認をします。
 
 [#prerequisite]
-== 1st Step: ユーザー名の確認
+== ユーザー名の確認
 
 画面上部のボックスに、ユーザー名はすでに設定されているかを確認してください。設定されている場合は、次のように表示されます：:
 
@@ -12,9 +12,9 @@ image::alreadyset.png[Set User ID above, 700]
 
 image::setuser.png[Set User ID above, 700]
 
-これにより、このワークショップのリンクとコピー・ペースト・コードがカスタマイズされます。誤って間違ったユーザー名を入力した場合は、緑のリサイクルアイコンをクリックしてリセットしてください。
+これにより、このワークショップの開発環境やOpenShiftのコンソールのリンクがカスタマイズされます。誤って間違ったユーザー名を入力した場合は、緑のリサイクルアイコンをクリックしてリセットしてください。
 
-== 2nd Step: ユーザー名の確認
+== コピー＆ペーストの確認
 
 このワークショップでは、コードやコマンドが表示されます。それらのテキストブロックのどこかをクリックするだけで、コピー/ペーストされます：:
 
@@ -38,7 +38,7 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 ----
 
 [#wsenvironment]
-== 3rd ワークショップ環境の構成について
+== ワークショップ環境の構成について
 
 ワークショップの環境は、以下で構成されています。:
 
@@ -47,7 +47,7 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 * https://www.redhat.com/en/products/runtimes[Red Hat Runtimes, window=_blank] - JBoss EAP、SpringBootやQuakusなどのアプリケーションフレームワーク、ランタイムです。 Red Hat Runtimeの中に、今回のワークショップで利用するRed Hat SSO(Keycloak)も含まれています。
 
 
-=== 4th ワークショップ環境のアクセス確認について
+=== ワークショップ環境のアクセス確認とレポジトリのgit clone
 開発環境にアクセスします, {{ CHE_URL }}[開発環境にアクセスし^] ユーザ名とパスワードを入力します (例 `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`):
 
 image::che-login.png[cdw, 700, align="center"]
@@ -67,7 +67,7 @@ image::crw-icons.png[cdw, 400, align="center"]
 
 image::gitclonepage.png[cdw, 600, align="center"]
 
-Step through the prompts, using the following value for **Repository URL**. If you use *FireFox*, it may end up pasting extra spaces at the end, so just press backspace after pasting:
+レポジトリURLには、下記のURLをコピーしてペーストしてください。
 
 [source, shell, role="copypaste"]
 ----
@@ -77,16 +77,6 @@ https://github.com/RedHat-Middleware-Workshops/keycloak-workshop-labs
 
 image::gitclone.png[crw, 600, align="center"]
 
-The project is now imported into your workspace. Following screenshot shows the workspace after the lab projects have been imported.
+これで、プロジェクトがワークスペースにインポートされました。
 
-1. On the left you can see the project explorer with the heading *EXPLORER:PROJECTS*. Project explorer can be used to navigate to source files. Once you click any source file. it will open up in the editor.
-2. On the right is the `Workspace Command View` with the heading *MYWORKSPACE:WORKSPACE*. In this view we have created point and click commands. These commands will be used through out the workshop labs.
-
-
-Perfect, now you should have an IDE setup. Lets move on to the workshop.
-
-== How to complete this workshop
-
-Click the "Next >" button at the bottom to advance to the next topic. You can also use the menu on the left to move around the instructions at will.
-
-Good luck, and let’s get started!
+次のステップに進むには、画面右下の青いボタンをクリックしてください。
