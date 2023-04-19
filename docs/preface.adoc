@@ -1,64 +1,107 @@
-== What is Red Hat SSO / keycloak
+[#Setup]
+Before we start the lab, its important that you read the following instructions carefully. These instructions will be refered from the rest of the content if you need to come back to them.
 
-Red Hat Single Sign-On (RH-SSO) is based on the Keycloak project and enables you to secure your web applications by providing Web single sign-on (SSO) capabilities based on popular standards such as SAML 2.0, OpenID Connect and OAuth 2.0. The RH-SSO server can act as a SAML or OpenID Connect-based Identity Provider, mediating with your enterprise user directory or 3rd-party SSO provider for identity information and your applications via standards-based tokens.
+[#prerequisite]
+== First Step: Confirm Your Username!
 
-Keycloak is an open source Identity and Access Management solution aimed at modern applications and services. It makes it easy to secure applications and services with little to no code.
+Look in the box at the top of your screen. Is your username set already? If so it will look like this:
 
-This page gives a brief introduction to RH-SSO and Keycloak and some of the features. For a full list of features refer to the https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.3/[documentation]
+image::alreadyset.png[Set User ID above, 700]
+
+If your username is properly set, then you can move on. **If not, in the above box, enter the user ID you were assigned** like this:
+
+image::setuser.png[Set User ID above, 700]
+
+This will customize the links and copy/paste code for this workshop. If you accidentally type the wrong username, just click the green recycle icon to reset it.
+
+Throughout this lab you'll discover how Quarkus can make your development of cloud native apps faster and more productive.
+
+== Click-to-Copy
+
+You will see various code and command blocks throughout these exercises which can be copy/pasted directly by clicking anywhere on the block of text:
+
+[source,java,role="copypaste"]
+----
+/* A sample Java snippet that you can copy/paste by clicking */
+public class CopyMeDirectly {
+    public static void main(String[] args) {
+        System.out.println("You can copy this whole class with a click!");
+    }
+}
+----
+
+Simply click once and the whole block is copied to your clipboard, ready to be pasted with kbd:[CTRL+V] (or kbd:[Command+V] on Mac OS).
+
+There are also Linux shell commands that can also be copied and pasted into a Terminal in your Development Environment:
+
+[source,sh,role="copypaste"]
+----
+echo "This is a bash shell command that you can copy/paste by clicking"
+----
+
+There are also Linux shell commands that can also be copied and pasted into a Terminal in your Development Environment:
+
+[source,sh,role="copypaste"]
+----
+echo "This is a bash shell command that you can copy/paste"
+----
+
+[#wsenvironment]
+== The Workshop Environment You Are Using
+
+Your workshop environment consists of several components which have been pre-installed and are ready to use. Depending on which parts of the workshop you’re doing, you will use one or more of:
+
+* https://www.OpenShift.com/[Red Hat OpenShift,window=_blank] - You’ll use one or more *projects* (Kubernetes namespaces) that are your own and are isolated from other workshop students
+* https://developers.redhat.com/products/OpenShift-dev-spaces/overview[Red Hat OpenShift Dev Spaces,window=_blank] - Built on the open Eclipse Che project, Red Hat OpenShift Dev Spaces uses Kubernetes and containers to provide any member of the development or IT team with a consistent, secure, and zero-configuration development environment. The experience is as fast and familiar as an integrated development environment on your laptop. OpenShift Dev Spaces is included with your OpenShift subscription and is available in the Operator Hub. It provides development teams a faster and more reliable foundation on which to work, and it gives operations centralized control and peace of mind.
+* https://www.redhat.com/en/products/runtimes[Red Hat Runtimes, window=_blank] - a collection of cloud-native runtimes and platform that enables Spring Boot, Node.js, and https://quarkus.io[Quarkus, window=_blank] developers to create Cloud-native apps with ease.
 
 
-Trying RH-SSO is quick and easy. And we will take a deep dive into RH-SSO in this workshop. But first; What is RH-SSO?
+=== About your workspace environment
+For developments and deployment, we use the using Red Hat CodeReady Workspaces, an online IDE based on https://www.eclipse.org/che/[Eclipe Che, window=_blank]. *Changes to files are auto-saved every few seconds*, so you don't need to save changes explicitly.
 
-=== Single-Sign On
+To get started, {{ CHE_URL }}[access the CodeReady Workspaces instance^] and log in using the username and password you are assigned (e.g. `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`):
 
-Users authenticate with RH-SSO rather than individual applications. This means that your applications don't have to deal with login forms, authenticating users, and storing users. Once logged-in to RH-SSO, users don't have to login again to access a different application.
+image::che-login.png[cdw, 700, align="center"]
 
-This also applied to logout. RH-SSO provides single-sign out, which means users only have to logout once to be logged-out of all applications that use RH-SSO.
+By logging in to CodeReady, you get access to your development workspace. We have already created a workspace for you. Your development environment opens up by clicking the workspace on the left menu.
 
-=== Kerberos bridge
+You can see icons on the left for navigating between project explorer, search, version control (e.g., Git), debugging, and other plugins. You'll use these during this workshop. Feel free to click on them and see what they do:
 
-If your users authenticate to workstations with Kerberos (LDAP or active directory) they can also be automatically authenticated to RH-SSO without having to provide their username and password again after they log on to the workstation.
+image::crw-icons.png[cdw, 400, align="center"]
 
-=== Identity Brokering and Social Login
+[NOTE]
+====
+If things get weird or your browser appears, you can simply reload the browser tab to refresh the view.
+====
 
-Enabling login with social networks is easy to add through the admin console. It's just a matter of selecting the social network you want to add. No code or changes to your application is required.
+Many features of CodeReady Workspaces are accessed via *Commands*. You can see a few of the commands listed with links on the home page (e.g., _New File.._, _Git Clone.._, and others).
 
-RH-SSO can also authenticate users with existing OpenID Connect or SAML 2.0 Identity Providers. Again, this is just a matter of configuring the Identity Provider through the admin console.
+If you ever need to run commands that you don't see in a menu, you can press kbd:[F1] to open the command window, or the more traditional kbd:[Control+SHIFT+P] (or kbd:[Command+SHIFT+P] on Mac OS X).
 
-=== User Federation
+Let's import our first project. Click on **Git Clone..** (or type kbd:[F1], enter 'git' and click on the auto-completed _Git Clone.._ )
 
-RH-SSO has built-in support to connect to existing LDAP or Active Directory servers. You can also implement your own provider if you have users in other stores, such as a relational database.
+image::gitclonepage.png[cdw, 600, align="center"]
 
-=== Client Adapters
+Step through the prompts, using the following value for **Repository URL**. If you use *FireFox*, it may end up pasting extra spaces at the end, so just press backspace after pasting:
 
-RH-SSO Client Adapters makes it really easy to secure applications and services. We have adapters available for a number of platforms and programming languages, but if there's not one available for your chosen platform don't worry. RH-SSO is built on standard protocols so you can use any OpenID Connect Resource Library or SAML 2.0 Service Provider library out there.
-Gatekeeper
+[source, shell, role="copypaste"]
+----
+https://github.com/RedHat-Middleware-Workshops/keycloak-workshop-labs
 
-You can also opt to use a proxy to secure your applications which removes the need to modify your application at all.
+----
 
-=== Admin Console
+image::gitclone.png[crw, 600, align="center"]
 
-Through the admin console administrators can centrally manage all aspects of the RH-SSO server.
+The project is now imported into your workspace. Following screenshot shows the workspace after the lab projects have been imported.
 
-They can enable and disable various features. They can configure identity brokering and user federation.
-
-They can create and manage applications and services, and define fine-grained authorization policies.
-
-They can also manage users, including permissions and sessions.
-
-=== Account Management Console
-
-Through the account management console users can manage their own accounts. They can update the profile, change passwords, and setup two-factor authentication.
-
-Users can also manage sessions as well as view history for the account.
-
-If you've enabled social login or identity brokering users can also link their accounts with additional providers to allow them to authenticate to the same account with different identity providers.
+1. On the left you can see the project explorer with the heading *EXPLORER:PROJECTS*. Project explorer can be used to navigate to source files. Once you click any source file. it will open up in the editor.
+2. On the right is the `Workspace Command View` with the heading *MYWORKSPACE:WORKSPACE*. In this view we have created point and click commands. These commands will be used through out the workshop labs.
 
 
-=== Standard Protocols
+Perfect, now you should have an IDE setup. Lets move on to the workshop.
 
-RH-SSO is based on standard protocols and provides support for OpenID Connect, OAuth 2.0, and SAML.
-Authorization Services
+== How to complete this workshop
 
-If role based authorization doesn't cover your needs, RH-SSO provides fine-grained authorization services as well. This allows you to manage permissions for all your services from the RH-SSO admin console and gives you the power to define exactly the policies you need. 
+Click the "Next >" button at the bottom to advance to the next topic. You can also use the menu on the left to move around the instructions at will.
 
+Good luck, and let’s get started!
