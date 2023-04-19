@@ -46,8 +46,8 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 ----
 
 
-基本的な設定ができたので、アプリケーションをデプロイします。
-OpenShiftのS2i（Source2Image）を使って、ソースコードから一気にコンテナを作成します。
+基本的な設定ができたので、アプリケーションをデプロイしていきます。
+OpenShiftのS2i（Source2Image）という機能を使って、ソースコードからコンテナを作成します。
 また、OpenShiftでデフォルトで提供されているhttpd(Apache Web Server)に、今回のJavaScriptを格納します。
 
 `js-console/src` に移動して以下のコマンドを実行します。
@@ -58,24 +58,24 @@ OpenShiftのS2i（Source2Image）を使って、ソースコードから一気�
 oc new-build --name js-console --binary --strategy source --image-stream httpd
 ----
 
-Ok, so `oc new-build` should have set the right directives for our applicaiton. i.e. `js-console` which uses the httpd stream.
+ビルドを開始します。以下のコマンドでは、ビルドがローカルのソースディレクトリから行われることを指定しています。
 
-Lets start our build; in the following command we specify that our build will be from our local source dir.
-[source,bash,subs="+macros,+attributes"]
+[source, bash,role="copypaste"]
 ----
 oc start-build js-console --from-dir . --follow
 ----
 
-Once our build is successfull, lets create a new app with that build; this will be our js-console app.
-[source,bash,subs="+macros,+attributes"]
+ビルドが成功したら、そのビルドで新しいアプリを作成します。これがjs-consoleアプリになります。
+
+[source, bash,role="copypaste"]
 ----
 oc new-app --image-stream=js-console:latest
 ----
 
-And finally expose a route for our service so that we can connect to it externally.
-[source,bash,subs="+macros,+attributes"]
-----
+そして、最後にjs-consoleアプリのサービスのルートを公開し、ブラウザから接続できるようにします。
 
+[source, bash,role="copypaste"]
+----
 oc expose svc/js-console
 ----
 
@@ -83,17 +83,16 @@ oc expose svc/js-console
 
 image::OpenShift-first-deployment.png[First deployment, 1024]
 
+OpenShiftコンソール上で、`js-console` が表示されるはずです。
+アイコンの右上にアクセスすると、エラーになっていまいます。
+もっと設定を行う必要があります。お気づきかもしれませんが、js-consoleアプリのRH-SSO側の設定まだしていないためです。次にRH-SSO側の設定していきます。
 
-Click on the route url and you should see the `js-console`.  This indicates that your first application was successfully deployed. But there still need to be more config done as it would return an error. As you might have noticed that we havent configured the RH-SSO for our js-console app yet.Lets go ahead and configure that. 
+RH-SSO管理画面の左のメニューバー `Client` をクリックします。(認証認可の世界では、SSOで連携するアプリケーションをClientと呼びます)
+次に、`Create` ボタンをクリックします。
 
-Click on the left menu bar item `Clients` 
-A list of clients will load. 
-Then Click the `Create` button
+設定には、js-consoleのURLが必要になります。次のコマンドで取得します。
 
-Following is the information you need to fill. 
-To get the route to your js-console you can run the following command.
-
-[source,bash,subs="+macros,+attributes"]
+[source, bash,role="copypaste"]
 ----
 oc get route js-console
 ----
