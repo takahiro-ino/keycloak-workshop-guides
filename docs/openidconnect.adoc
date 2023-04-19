@@ -13,7 +13,7 @@ RH-SSO では、クライアントスコープと呼ばれ機能で共有設定�
 
 <1> RH-SSOの管理画面に、Adminでログインします。
 
-<2> 左メニューのUsersを開きます。
+<2> 左メニューの `Users` を開きます。
 
 <3> `View all users`　をクリックします。
 
@@ -25,15 +25,15 @@ RH-SSO では、クライアントスコープと呼ばれ機能で共有設定�
 
 ユーザの属性に、アバターを設定したので、次はアプリケーション側を設定して、トークンに追加されるようにします。
 
-- Click on Client Scopes then Create. 
+- 左メニューの `Client Scopes` を開いて、 `Create` をクリックします。
 
-Fill in the following values:
+以下の値を入力します:
 
     Name: avatar
     Consent Screen Text: Avatar
 
-- Click on Save. 
-- Click on Mappers then Create.
+- `Save` をクリックします。
+- 　同じ画面上にある `Mappers` をクリックして、 `Create` をクリックします。
 
 Fill in the following values:
 
