@@ -20,7 +20,6 @@ vars:
 modules:
   activate:
   - preface
-  - settingup
   - keycloak
   - configuration
   - firstapp
