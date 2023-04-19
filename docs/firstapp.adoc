@@ -10,27 +10,21 @@ cd js-console
 ----
 
 [#firstapp-authentication]
-=== Authentication via JS
-By default to authenticate you need to call the login function. 
-However, there are also two options available to make the adapter automatically authenticate. You can pass login-required or check-sso to the init function. login-required will authenticate the client if the user is logged-in to RH-SSO or display the login page if not. check-sso will only authenticate the client if the user is already logged-in, if the user is not logged-in the browser will be redirected back to the application and remain unauthenticated.
+=== JavaScirptによる認証
+SSOを実現するには、アプリケーション側に、RH-SSOのURLを設定する必要があります。
 
-You can configure a silent check-sso option. With this feature enabled, your browser won’t do a full redirect to the RH-SSO server and back to your application, but this action will be performed in a hidden iframe, so your application resources only need to be loaded and parsed once by the browser when the app is initialized and not again after the redirect back from RH-SSO to your app. This is particularly useful in case of SPAs (Single Page Applications).
-
-In our case we use `kc.login(login)` which then redirects itself to the RH-SSO server to ensure that we have logged session. 
-
-Make sure you copy your SSO server URL (created in the previous section):
-e.g. in my case it looks something like this:
+SSOサーバーのURLをコピーしておきます：
+OpenShiftのコマンドでSSOサーバーのURLは取得できます：
 ```
 > oc get route sso
 NAME   HOST/PORT                                              PATH   SERVICES   
 sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 ```
+または、ブラウザからコピーもOKです。
 
-or just copy it from your browser, ensure you copy the protocol also e.g. 'https://...'
+`js-console/src/keycloak.json` ファイルを編集します。
 
-Now open the `js-console/src/keycloak.json`
-
-Change the following line "auth-server-url" with your SERVER_URL
+以下の "auth-server-url" を https://〜でSSOサーバのURLに変更します。
 [source, js,role="copypaste"]
 ----
 {
