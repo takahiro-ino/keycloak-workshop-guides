@@ -4,10 +4,8 @@ config:
 modules:
   preface:
     name: 環境について
-  settingup:
-    name: Setting up
   keycloak:
-    name: Getting started with RH-SSO
+    name: Red Hat 
   configuration:
     name: Configuring RH-SSO
   firstapp:
