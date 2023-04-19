@@ -14,17 +14,16 @@ cd js-console
 SSOを実現するには、アプリケーション側に、RH-SSOのURLを設定する必要があります。
 
 SSOサーバーのURLをコピーしておきます：
-OpenShiftのコマンドでSSOサーバーのURLは取得できます：
+OpenShiftのコマンドでSSOサーバーのホスト名は取得できます(https://は含まれてません)：
 ```
 > oc get route sso
 NAME   HOST/PORT                                              PATH   SERVICES   
 sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 ```
-または、ブラウザからコピーもOKです。
 
-`js-console/src/keycloak.json` ファイルを編集します。
+`src/keycloak.json` ファイルを編集します。
 
-以下の "auth-server-url" を https://〜でSSOサーバのURLに変更します。
+以下の "auth-server-url" をSSOサーバのURLに変更します。
 [source, js,role="copypaste"]
 ----
 {
@@ -35,10 +34,9 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 
 ----
 
-Next open the `js-console/src/index.html`
-And replace the SERVER_URL in the <header> <src>
+次に、 `src/index.html` を開き、<header> <src>のSERVER_URLの部分を置き換えます。
 
-Your server URL should be as follows
+サーバーのURLは、以下のようになります。
 
 [source, js,role="copypaste"]
 ----
