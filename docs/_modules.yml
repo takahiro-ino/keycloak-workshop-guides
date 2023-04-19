@@ -3,7 +3,7 @@ config:
 
 modules:
   preface:
-    name: Preface
+    name: 環境について
   settingup:
     name: Setting up
   keycloak:
