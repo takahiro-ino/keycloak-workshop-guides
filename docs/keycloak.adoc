@@ -33,18 +33,22 @@ RH-SSO Realm: demojs
 
 image::sso_install.png[SSO install Config]
 
-Press Next and complete the installation with the default selections. 
+Createボタンを押します。
 
-Once compeleted, OpenShift will start the installation procedure and you can view the progress in the OpenShift console. Wait for the deployment to compelete. Once the deployment is finished. you should see the following on your OpenShift console. 
+Createボタンを押すとRH-SSOのデプロイが開始され、OpenShift コンソールで進行状況を確認することができます。(だいたい、3〜5分程度かかります)
+デプロイが完了すると、OpenShiftコンソールで、以下のようにアイコンが青くなります。 
 
 image::sso_installed.png[SSO installed]
 
-Now that SSO is installed lets login to our newly created SSO. Click on the link as denoted in the picture and it should take you to the Red Hat SSO main page. 
+RH-SSOがインストールが完了したら、RH-SSOの管理画面にログインしてみます。アイコンの右上のをクリックし、Adminstration Consoleをクリックします。
+Adminstration Consoleにログインは、さきほど入力したUsernameとPasswordを入力します。
+Username or email: admin
+Password: password
 
 image::sso_adminlogin.png[Login screen]
 
 
 === Let's move on
-You now have a running SSO server. Lets move on to do some basic configuration before we head on to using it with our apps.
+次は、アプリケーション用の基本的な設定をしていきます。
 
 
