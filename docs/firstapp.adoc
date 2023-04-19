@@ -50,7 +50,7 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 OpenShiftのS2i（Source2Image）を使って、ソースコードから一気にコンテナを作成します。
 また、OpenShiftでデフォルトで提供されているhttpd(Apache Web Server)に、今回のJavaScriptを格納します。
 
- `js-console/src` に移動してコマンドは実行します。
+`js-console/src` に移動して以下のコマンドを実行します。
 
 [source, bash,role="copypaste"]
 ----
