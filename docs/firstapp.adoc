@@ -46,15 +46,13 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 ----
 
 
-Now that you have the basic config in place, lets go ahead and deploy our applicaton.
-We use the S2i (Source2Image) from OpenShift and create a stream from our project. This has some benefits. If we need to change anything in our app we will just start a new build. Incase you have missed anything, you could easily do the `start-build` again.
+基本的な設定ができたので、アプリケーションをデプロイします。
+OpenShiftのS2i（Source2Image）を使って、ソースコードから一気にコンテナを作成します。
+また、OpenShiftでデフォルトで提供されているhttpd(Apache Web Server)に、今回のJavaScriptを格納します。
 
-We also use the httpd image-stream provided by default with OpenShift. This is the Apache httpd server; hence our application will be packaged into an Apache web server.
+ `js-console/src` に移動してコマンドは実行します。
 
-*before starting make sure that you have Code Ready workspace `Terminal` open. 
-
-- and also ensure that you have changed you directory too `js-console/src`
-[source,bash,subs="+macros,+attributes"]
+[source, bash,role="copypaste"]
 ----
 
 oc new-build --name js-console --binary --strategy source --image-stream httpd
