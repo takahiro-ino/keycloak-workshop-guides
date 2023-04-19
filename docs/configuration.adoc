@@ -72,38 +72,38 @@ OpenShiftコンソールのmailcatcherの右上のアイコンをクリックす
 
 image::mailcatcher_ui.png[Email config]
 
+これでEメールの設定は完了です。
 
-Perfect, now we have the email configuration. 
-
-Lets move on to the `Login` tab.
+では、 `Login` タブに移動します。
 
 image::sso_adminloginconfig.png[Realm Login settings]
 
-Enable the following:
+以下を有効にします:
 
-1. `User Registration` , User registration allows new users to register to the SSO
+1. `User Registration` 新しいユーザーがSSOに登録可能にします。
 
-2. `Verify Email` , and this will ensure that we can verify the user by thier email.
+2. `Verify Email` メールによるユーザーを確認を有効化します。
 
-Press `Save`
+`Save` をクリックします。
 
-Now lets test our basic config. 
-Open a new browser session in privacy mode, or open another browser. 
-  
-  * Ensure that you are not logged into the SSO admin panel in the newly opened browser sessions. 
+それでは、この設定をテストしていきます。
+プライバシーモードで新しいブラウザセッションを開くか、別のブラウザを開いてください。
+RH-SSOには、アカウント管理画面があり、そこからアカウントを登録します。
 
-Link to the console: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs/account
+アカウント管理画面: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs/account
 
-<1> It should show a login screen, with a link under the buttons to register. 
+<1> アカウント管理画面の右上の `Sing-in` をクリックすると、 ログイン画面が表示されます。
 
-<2> Hit the register button and register a new user. 
+<2> `register` をクリックし、適当にユーザ情報を入力してください。
 
-<3> Ensure that you fill in the an email address, since an email will be sent to verify the newly created user. ensure that this email address is not the same as used previously in this excercise. The email will land in our mailcatcher web-ui. 
+<3> 新しく作成されたユーザーを確認するためにメールが送信されるので、mailcatcherに送信されます。
 
-Once you have registered you should see the following message:
+ユーザ登録が完了すると、以下の画面が表示されます:
 
 image::sso_adminemailverify.png[Realm Login settings]
 
-Head over to your email and you should have recieved a new email. Click on the link in the email to verify this new user. Now you should be able to login to the admin console with your new user. 
+mailcatcherにアクセスすると、新しい電子メールが届いているはずです。
+メールに記載されているリンクをクリックし、新しいユーザーを確認します。これで、新しいユーザで管理コンソールにログインできるはずです。（確認メールのリンクをコピーして、ユーザ登録したブラウザ側で開いてください）
 
-Great, so now we have some basic config for our RH-SSO server and its realm. Lets head off to the next section where we will deploy our first application. And subsequently configure it to use RH-SSO.
+さて、これで RH-SSO サーバとそのレルムの基本的な設定ができました。
+次の章では、最初のアプリケーションをデプロイします。そして、RH-SSO を使用するように設定します。
