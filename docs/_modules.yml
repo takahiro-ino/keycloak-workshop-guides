@@ -7,7 +7,7 @@ modules:
   keycloak:
     name: Red Hat SSOのインストール
   configuration:
-    name: Configuring RH-SSO
+    name: Red Hat SSOのメール設定
   firstapp:
     name: Simple JS Console application
   openidconnect:
