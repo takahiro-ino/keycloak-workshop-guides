@@ -7,10 +7,10 @@ Red Hat Single Sign-Onのコンテナイメージをインストールを実施�
 
 image::openshift_login.png[openshift_login, 700]
 
-資格情報を使ってログインします。
+以下の情報を使ってログインします。
 
 * Username: `{{ USER_ID }}`
-* Password: `{{ OPENSHIFT_USER_PASSWORD }}`
+* Password: `openshift`
 
 === インストール
 Make sure that you have completed the setting up instructions before moving forward in this section. 
