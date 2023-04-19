@@ -98,7 +98,7 @@ oc get route js-console
 ----
 
 フォームに必要事項を入力し（例：以下の画面）、 `save` をクリックします。
-js-consoleアプリのURLには、"http://"を先頭につけてください("http://js-console-evals01-sso-kubernetes-workshop.apps.cph-5a34.open.redhat.com")
+js-consoleアプリのURLには、 "http://" を先頭につけてください (例: "http://js-console-evals01-sso-kubernetes-workshop.apps.cph-5a34.open.redhat.com" )
 
 image::sso_adminclientconfig.png[Realm Client settings]
 
