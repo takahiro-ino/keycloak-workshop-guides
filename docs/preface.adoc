@@ -1,24 +1,22 @@
 [#Setup]
-Before we start the lab, its important that you read the following instructions carefully. These instructions will be refered from the rest of the content if you need to come back to them.
+ワークショップを始める前に、ワークショップの環境確認をします。
 
 [#prerequisite]
-== First Step: Confirm Your Username!
+== First Step: ユーザー名の確認します！
 
-Look in the box at the top of your screen. Is your username set already? If so it will look like this:
+画面上部のボックスに、ユーザー名はすでに設定されているかを確認してください。設定されている場合は、次のように表示されます：:
 
 image::alreadyset.png[Set User ID above, 700]
 
-If your username is properly set, then you can move on. **If not, in the above box, enter the user ID you were assigned** like this:
+ユーザー名が正しく設定されている場合は、次に進みます。** ユーザ名が設定されていない場合は、上記のボックスに、割り当てられたユーザーIDを次のように入力してください **：
 
 image::setuser.png[Set User ID above, 700]
 
-This will customize the links and copy/paste code for this workshop. If you accidentally type the wrong username, just click the green recycle icon to reset it.
-
-Throughout this lab you'll discover how Quarkus can make your development of cloud native apps faster and more productive.
+これにより、このワークショップのリンクとコピー・ペースト・コードがカスタマイズされます。誤って間違ったユーザー名を入力した場合は、緑のリサイクルアイコンをクリックしてリセットしてください。
 
 == Click-to-Copy
 
-You will see various code and command blocks throughout these exercises which can be copy/pasted directly by clicking anywhere on the block of text:
+このワークショップでは、コードやコマンドが表示されます。それらのテキストブロックのどこかをクリックするだけで、コピー/ペーストされます：:
 
 [source,java,role="copypaste"]
 ----
@@ -30,33 +28,26 @@ public class CopyMeDirectly {
 }
 ----
 
-Simply click once and the whole block is copied to your clipboard, ready to be pasted with kbd:[CTRL+V] (or kbd:[Command+V] on Mac OS).
+上記をクリックするとブロック全体がクリップボードにコピーされ、 Windowsなら、 kbd:[CTRL+V] Macなら、 kbd:[Command+V] でペーストできます。
 
-There are also Linux shell commands that can also be copied and pasted into a Terminal in your Development Environment:
+また、Linuxのシェルコマンドもあり、これも開発環境のターミナルにコピー＆ペーストすることができます:
 
 [source,sh,role="copypaste"]
 ----
 echo "This is a bash shell command that you can copy/paste by clicking"
 ----
 
-There are also Linux shell commands that can also be copied and pasted into a Terminal in your Development Environment:
-
-[source,sh,role="copypaste"]
-----
-echo "This is a bash shell command that you can copy/paste"
-----
-
 [#wsenvironment]
-== The Workshop Environment You Are Using
+== ワークショップ環境の構成について
 
-Your workshop environment consists of several components which have been pre-installed and are ready to use. Depending on which parts of the workshop you’re doing, you will use one or more of:
+ワークショップの環境は、あらかじめインストールされ、すぐに使えるようになったいくつかのコンポーネントで構成されています。:
 
-* https://www.OpenShift.com/[Red Hat OpenShift,window=_blank] - You’ll use one or more *projects* (Kubernetes namespaces) that are your own and are isolated from other workshop students
-* https://developers.redhat.com/products/OpenShift-dev-spaces/overview[Red Hat OpenShift Dev Spaces,window=_blank] - Built on the open Eclipse Che project, Red Hat OpenShift Dev Spaces uses Kubernetes and containers to provide any member of the development or IT team with a consistent, secure, and zero-configuration development environment. The experience is as fast and familiar as an integrated development environment on your laptop. OpenShift Dev Spaces is included with your OpenShift subscription and is available in the Operator Hub. It provides development teams a faster and more reliable foundation on which to work, and it gives operations centralized control and peace of mind.
-* https://www.redhat.com/en/products/runtimes[Red Hat Runtimes, window=_blank] - a collection of cloud-native runtimes and platform that enables Spring Boot, Node.js, and https://quarkus.io[Quarkus, window=_blank] developers to create Cloud-native apps with ease.
+* https://www.OpenShift.com/[Red Hat OpenShift,window=_blank] - 本ワークショップの実行環境です。
+* https://developers.redhat.com/products/OpenShift-dev-spaces/overview[Red Hat OpenShift Dev Spaces,window=_blank] - Visual StudioライクなWebブラウザで利用できるIDE環境です。OpenShift Dev Spacesは、OpenShiftに含まれて提供されています。
+* https://www.redhat.com/en/products/runtimes[Red Hat Runtimes, window=_blank] - JBoss EAP、SpringBootやQuakusなどのアプリケーションフレームワーク、ランタイムです。
 
 
-=== About your workspace environment
+=== ワークショップ環境のアクセス確認について
 For developments and deployment, we use the using Red Hat CodeReady Workspaces, an online IDE based on https://www.eclipse.org/che/[Eclipe Che, window=_blank]. *Changes to files are auto-saved every few seconds*, so you don't need to save changes explicitly.
 
 To get started, {{ CHE_URL }}[access the CodeReady Workspaces instance^] and log in using the username and password you are assigned (e.g. `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`):
