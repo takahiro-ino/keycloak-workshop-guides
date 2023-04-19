@@ -47,13 +47,13 @@ RH-SSO では、クライアントスコープと呼ばれ機能で共有設定�
 
 クライアントスコープを作成しましたが、これは共通定義なので、アプリケーションの `js-console` にも変更を反映させる必要があります。
 
-- Go to Clients and select js-console. Select Client Scopes.
+- 左メニューの `Clients` を開いて、 `js-console` をクリックし、 `Client Scopes` タブをクリックします。
 
-- We're going to add it as a Default Client Scope. So select the avatar here and click 'Add selected'. As it's a default scope it is added to the token by default, if it's set as an optional client scope the client has to explicitly request it with the scope parameter.
+- Default Client Scopeとして追加することにします。ここで `avatar` をクリックし、 `Add selected` をクリックします。デフォルトのスコープなので、デフォルトでトークンに追加されます。
 
-- Now go back to the JS Console and click Refresh. You should see a keycloak logo as your avatar on the main JS Console dashboard.
+- 次に、JS Consoleのアプリに戻り、 `refresh` をクリックします。JS Consoleのメインダッシュボードにアバターとしてkeycloakのロゴが表示されます。
 
-- Click on `ID Token JSON` and `Access Token JSON` links and you can see the custom attribute added into the token as well. 
+- `Access Token JSON`　をクリックすると、トークンに追加されたカスタム属性も表示されます。
 
 - Refresh your JS Console
 
