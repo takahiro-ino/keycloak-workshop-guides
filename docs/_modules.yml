@@ -5,7 +5,7 @@ modules:
   preface:
     name: 環境について
   keycloak:
-    name: Red Hat 
+    name: Red Hat SSOのインストール
   configuration:
     name: Configuring RH-SSO
   firstapp:
