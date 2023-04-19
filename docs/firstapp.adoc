@@ -90,20 +90,19 @@ OpenShiftコンソール上で、`js-console` が表示されるはずです。
 RH-SSO管理画面の左のメニューバー `Client` をクリックします。(認証認可の世界では、SSOで連携するアプリケーションをClientと呼びます)
 次に、`Create` ボタンをクリックします。
 
-設定には、js-consoleのURLが必要になります。次のコマンドで取得します。
+設定には、js-consoleのURLが必要になります。開発環境の画面のターミナルから、次のコマンドで取得します。
 
 [source, bash,role="copypaste"]
 ----
 oc get route js-console
 ----
 
-Fill in the details on the form (e.g. in below screenshot) and press save. Ensure you use protocol 'http://' with your route e.g. 'http://js-console-evals01-sso-kubernetes-workshop.apps.cph-5a34.open.redhat.com'(An example shown in the following screenshot)
+フォームに必要事項を入力し（例：以下の画面）、 `save` をクリックします。
+js-consoleアプリのURLには、"http://"を先頭につけてください("http://js-console-evals01-sso-kubernetes-workshop.apps.cph-5a34.open.redhat.com")
 
 image::sso_adminclientconfig.png[Realm Client settings]
 
-Now go back to your browser and relaod the JS Console app. You should be redirected to the Login page
-
-image::sso_adminloginconfig.png[Realm Login settings]
+JS Consoleアプリを再読み込みしてください。ログインページにリダイレクトされるはずです。
 
 Register a new user with an email address.
 
