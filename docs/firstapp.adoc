@@ -103,28 +103,15 @@ js-consoleアプリのURLには、 "http://" を先頭につけてください (
 image::sso_adminclientconfig.png[Realm Client settings]
 
 JS Consoleアプリを再読み込みしてください。ログインページにリダイレクトされるはずです。
+ログインすると、次のコンソールが表示され、登録したユーザー名が表示されます。
+JS Consoleアプリ上にある `Access Token` `Access JSON Token` をクリックしてください。
+Access Tokenは、 RH-SSOから取得したアクセストークンになります。
+Access JSON Tokenは、アクセストークンをbase64デコードしたJWTの内容になります。
 
-Register a new user with an email address.
-
-image::sso_create-user.png[Create user]
-
-
-After registration you should be able to login and should see the following Console with your registered users Name
 
 image::sso_demojsconsole.png[JS Console]
 
-
-Congratulations!
-
-- Configured your first SSO JS App.
-
-- deployed the JS App via image stream
-
-- And how the JS Adapter works.
-
-And it only get interesting from here on. This app is our basis for these excercises. Lets head off to the next section and what more can we do with OIDC.
-
-
+おつかれさまです！
 
 
 
