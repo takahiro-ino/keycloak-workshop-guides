@@ -11,7 +11,7 @@ modules:
   firstapp:
     name: JavaScript Consoleアプリ
   openidconnect:
-    name: Open ID Connect
+    name: トークンを編集
   usergroups:
     name: Users and groups
   identityproviders:
