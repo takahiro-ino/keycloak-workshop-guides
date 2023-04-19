@@ -16,11 +16,11 @@ MailCatcherを実行することで、テスト用に設定したすべてのメ
 
 image::crw_right_workbench.png[Workbench]
 
-<1> Login to OpenShift
+<1> Login to OpenShiftをクリックします。
 
-<2> New Terminal
+<2> New Terminalをクリックします。
 
-Now you can run the following commands in the terminal you just opened.
+New Terminalで開いたターミナルで、以下のコマンドを実行します。
 
 [source,bash,role="copypaste"]
 ----
@@ -29,29 +29,36 @@ oc new-app quay.io/sshaaf/mailcatcher --name=mailcatcher
 oc expose svc/mailcatcher --port 8080
 ----
 
-<1> the first command will initiate the mailcatcher server
+コマンドの説明
 
-<2> the second ones exposes the port 8080 to ensure we have the http end point setup for viewing the emails recieved. 
+<1> 最初のコマンドでメールキャッチャーサーバーをデプロイします
 
-Once the installation is done you should see it as follows. 
+<2> 2つ目のコマンドは、受信したメールを見るためのhttpエンドポイントを設定するために、8080番ポートを公開します。
+
+デプロイが完了すると、OpenShiftのコンソールで次のように表示されます。
 
 image::OpenShift_mailcatcherinstalled.png[Mailcatcher]
 
-Lets configure our new realm demojs. Just a small config we should do before that. Since we plan to use emails lets add the Admin email account details too. 
+RH-SSO側の管理画面で設定をします。
+まず、管理者用メールアカウントを追加します。
+SSO 管理コンソールにログインしていることを確認し、SSO 管理コンソールの右端にあるメニューをクリックします。
 
-Ensure you are logged into the SSO admin console. Once logged in click on menu at the right hand corner of the SSO Admin console.
-
-Click on `Manage account`, this will bring you to the Admin user profile. 
+`Manage account`　をクリックすると、管理者ユーザープロファイルが表示されます。
 
 image::sso_adminprofile.png[Admin profile]
 
-Make sure you setup a valid email address that is reachable and also fill in the name fields. 
+Personal Info画面が開くので、メールアドレスとFirst nameとLast nameを入力します。
+Email： admin@mysso.com
+First name:  適当でOK
+Last name: 適当でOK
 
-Once done press save and click on `Back to Security Admin Console`.
+完了したら、 `save` ボタンを押して、　`Back to Security Admin Console`　に戻るをクリックします。
 
-Now goto the `realm settings` by clicking on the demojs Realm.
-
-Press the email Tab, and lets configure it.
+次に、`realm settings` をクリックし、 `Email` タブをクリックします。
+さきほど設定した内容を入力します。
+Host: mailcatcher
+Port: 1025
+From: admin@mysso.com
 
 image::sso_adminemailconfig.png[Realm Email config]
 
