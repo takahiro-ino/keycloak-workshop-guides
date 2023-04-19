@@ -5,30 +5,25 @@
 トークンにクレームを追加することで、アプリ側で細かい認可の設定が可能になります。(実際は、アプリ側でクレームの内容を処理する必要があります)
 
 [#openid-client-scopes]
-=== What are Client Scopes?
-If you have many applications you need to secure and register within your organization, it can become tedious to configure the protocol mappers and role scope mappings for each of these clients. Red Hat SSO allows you to define a shared client configuration in an entity called a client scope.
+=== クライアントスコープとは？
+組織内などで保護および登録する必要のあるアプリケーションが多数ある場合、これらのアプリケーションごとにRH-SSOで設定するのは面倒になることがあります。
+RH-SSO では、クライアントスコープと呼ばれ機能で共有設定を定義することができます。
 
-Client scopes also provide support for the OAuth 2 scope parameter, which allows a client application to request more or fewer claims or roles in the access token, according to the application needs.
+今回は、ユーザ情報にアバターを追加して、アプリにアバターを表示させます。
 
-The OpenID Connect specification defines a set of standard claims. The set of standard claims include name, email, gender, birth date, and so on. However, if you want to capture information about a user and there currently isn't a standard claim that best reflects this piece of information, you can create custom claims and add them to your tokens.
+<1> RH-SSOの管理画面に、Adminでログインします。
 
-What if your applications want to know something else about users? Say you want to have an avatar available for your users.
+<2> 左メニューのUsersを開きます。
 
-Red Hat SSO makes it possible to add custom attributes to users as well as adding custom claims to tokens.
+<3> `View all users`　をクリックします。
 
-<1> Ensure you are logged in as Admin
+<4> `Attributes` タブをクリックし、 Keyに `avatar_url` を入力 
 
-<2> Lets first open Users 
+<5> `value`　に https://www.keycloak.org/resources/images/keycloak_logo_200px.svg を入力します
 
-<3> And then View all users
+<6> `Save` をクリックします。
 
-<4> Select the user you registered with earlier, and not the Admin user.
-
-<5> Click on attributes and add key avatar_url with value https://www.keycloak.org/resources/images/keycloak_logo_200px.svg. 
-
-<6> Click Add followed by Save.
-
-Now Red Hat SSO knows the users avatar, but the application also needs access to this. We're going to add this through Client Scopes.
+ユーザの属性に、アバターを設定したので、次はアプリケーション側を設定して、トークンに追加されるようにします。
 
 - Click on Client Scopes then Create. 
 
