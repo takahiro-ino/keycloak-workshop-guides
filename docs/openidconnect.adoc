@@ -35,7 +35,7 @@ RH-SSO では、クライアントスコープと呼ばれ機能で共有設定�
 - `Save` をクリックします。
 - 　同じ画面上にある `Mappers` をクリックして、 `Create` をクリックします。
 
-Fill in the following values:
+以下の値を入力します:
 
     Name: avatar
     Mapper Type: User Attribute
@@ -43,9 +43,9 @@ Fill in the following values:
     Token Claim Name: avatar_url
     Claim JSON Type: String
 
-- Click Save.
+- `Save` をクリックします。
 
-Now we've created a client scope, but we also need to asign it to the client, so that our client 'js-console' can reflect the change as well.
+クライアントスコープを作成しましたが、これは共通定義なので、アプリケーションの `js-console` にも変更を反映させる必要があります。
 
 - Go to Clients and select js-console. Select Client Scopes.
 
