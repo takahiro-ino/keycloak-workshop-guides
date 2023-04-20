@@ -12,15 +12,6 @@ modules:
     name: JavaScript Consoleアプリ
   openidconnect:
     name: トークンを編集
-  usergroups:
-    name: Users and groups
-  identityproviders:
-    name: Identity providers and OAuth
-  advanceconfig:
-    name: Advanced Configuration
-  quarkusservice:
-    name: Securing Cloud native apps
-  conclusion:
-    name: Conclusion  
-  appendix:
-    name: Appendix
+  clientcredentials:
+    name: クライアントクレデンシャル
+
