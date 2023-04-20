@@ -24,9 +24,5 @@ modules:
   - configuration
   - firstapp
   - openidconnect
-  - usergroups
-  - identityproviders
-  - advanceconfig
-  - quarkusservice
-  - conclusion
-  - appendix
+  - clientcredentials
+
