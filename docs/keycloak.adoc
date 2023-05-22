@@ -16,7 +16,7 @@ image::openshift_login.png[openshift_login, 700]
 === Red Hat SSOのインストール
 Red Hat SSOのインストールを実施します。
 
-<1> 右メニューの `Add` をクリックし、 >  'Developer Catalog'   > 'All services’ をクリックします。
+<1> 左メニューの `Add` をクリックし、 >  'Developer Catalog'   > 'All services’ をクリックします。
 <2> 検索ボックスに`SSO` と入力します。
 
 image::OpenShift-sso_search.png[Search for SSO]
