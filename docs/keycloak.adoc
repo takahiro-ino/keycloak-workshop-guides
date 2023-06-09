@@ -1,9 +1,9 @@
 [#RH-SSO]
-Red Hat SSOのコンテナイメージをインストールを実施します。
+Red Hat SSO のコンテナイメージのインストールを実施します。
 
 [#ssoinstall]
 === OpenShiftコンソールにログイン
-Red Hat SSOのコンテナイメージは、OpenShiftコンソール上で実施します。
+Red Hat SSO のコンテナイメージのインストールは OpenShift コンソール上で実行します。
 まず、新規ブラウザで {{ CONSOLE_URL }}[OpenShift web コンソール^] を開きます。
 
 image::openshift_login.png[openshift_login, 700]
@@ -13,40 +13,42 @@ image::openshift_login.png[openshift_login, 700]
 * Username: `{{ USER_ID }}`
 * Password: `openshift`
 
-=== Red Hat SSOのインストール
-Red Hat SSOのインストールを実施します。
+=== Red Hat SSO のインストール
+Red Hat SSO のインストールを実施します。
 
-<1> 左メニューの `Add` をクリックし、 >  'Developer Catalog'   > 'All services’ をクリックします。
-<2> 検索ボックスに`SSO` と入力します。
+<1> 左メニューの `+追加` をクリックし、 Red Hat SSO インストール先のプロジェクトとして '{{ USER_ID }}-keycloak' を選択します。
+<2> '開発者カタログ' から 'すべてのサービス' をクリックします。
+<3> 検索ボックスに `SSO` と入力します。
 
 image::OpenShift-sso_search.png[Search for SSO]
 
-<3>  `Red Hat Single Sign-On 7.5 on OpenJDK (Ephemeral)` をクリックします。
+<4>  `Red Hat Single Sign-On 7.5 on OpenJDK (Ephemeral)` をクリックします。
 
-<4> 'Initiate Template' をクリックします。これにより、'Configuration' 画面が表示されます。
+<5> 'テンプレートのインスタンス化' をクリックします。これにより、初期設定画面が表示されます。
 この画面では、Red Hat SSOに設定できる初期パラメータを表しています。
 ここでは、以下の３点を入力します。
-RH-SSO Administrator Username: admin
-RH-SSO Administrator Password: password
-RH-SSO Realm: demojs
 
+* RH-SSO Administrator Username: `admin`
+* RH-SSO Administrator Password: `password`
+* RH-SSO Realm: `demojs`
 
 image::sso_install.png[SSO install Config]
 
-Createボタンを押します。
+<6> '作成'ボタンを押します。
 
-Createボタンを押すとRH-SSOのデプロイが開始され、OpenShift コンソールで進行状況を確認することができます。(だいたい、3〜5分程度かかります)
-デプロイが完了すると、OpenShiftコンソールで、以下のようにアイコンが青くなります。 
+'作成' ボタンを押すと Red Hat SSO のデプロイが開始され、OpenShift コンソールで進行状況を確認することができます。(だいたい、3〜5分程度かかります)
+デプロイが完了すると、OpenShift コンソールで、以下のようにアイコンが青くなります。 
 
 image::sso_installed.png[SSO installed]
 
-RH-SSOがインストールが完了したら、RH-SSOの管理画面にログインしてみます。アイコンの右上のをクリックし、Adminstration Consoleをクリックします。
-Adminstration Consoleにログインは、さきほど入力したUsernameとPasswordを入力します。
-Username or email: admin
-Password: password
+Red Hat SSO がインストールが完了したら、Red Hat SSO の管理画面にログインしてみます。
+アイコンの右上のをクリックし、'Welcome to Red Hat Single Sign-On' 画面が表示されたら 'Adminstration Console' をクリックします。
+Adminstration Console へのログインは、先程 'テンプレートのインスタンス化' にて入力して Username/Password を入力します。
+
+* Username or email: `admin`
+* Password: `password`
 
 image::sso_adminlogin.png[Login screen]
-
 
 === Let's move on
 次は、アプリケーション用の基本的な設定をしていきます。
