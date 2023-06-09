@@ -24,5 +24,3 @@ modules:
   - configuration
   - firstapp
   - openidconnect
-  - clientcredentials
-

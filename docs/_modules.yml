@@ -3,15 +3,13 @@ config:
 
 modules:
   preface:
-    name: 環境について
+    name: ハンズオン環境の確認
   keycloak:
-    name: Red Hat SSOのインストール
+    name: Red Hat SSO インストール
   configuration:
-    name: Red Hat SSOのメール設定
+    name: Red Hat SSO 設定
   firstapp:
-    name: JavaScript Consoleアプリ
+    name: JavaScript Console アプリケーションのデプロイ
   openidconnect:
-    name: トークンを編集
-  clientcredentials:
-    name: クライアントクレデンシャル
+    name: OpenID Connect 認可コードフローの理解
 
