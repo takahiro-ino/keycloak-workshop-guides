@@ -4,11 +4,11 @@
 [#prerequisite]
 == ユーザー名の確認
 
-画面上部のボックスに、ユーザー名はすでに設定されているかを確認してください。設定されている場合は、次のように表示されます：:
+画面上部のボックスに、ユーザー名はすでに設定されているかを確認してください。設定されている場合は、次のように表示されます。
 
 image::alreadyset.png[Set User ID above, 700]
 
-ユーザー名が正しく設定されている場合は、次に進みます。** ユーザ名が設定されていない場合は、上記のボックスに、割り当てられたユーザーIDを次のように入力してください **：
+ユーザー名が正しく設定されている場合は、次に進みます。** ユーザ名が設定されていない場合は、上記のボックスに、割り当てられたユーザーIDを次のように入力してください。** 
 
 image::setuser.png[Set User ID above, 700]
 
@@ -16,7 +16,7 @@ image::setuser.png[Set User ID above, 700]
 
 == コピー＆ペーストの確認
 
-このワークショップでは、コードやコマンドが表示されます。それらのテキストブロックのどこかをクリックするだけで、コピー/ペーストされます：:
+このワークショップでは、コードやコマンドが表示されます。それらのテキストブロックのどこかをクリックするだけで、コピー/ペーストされます。
 
 [source,java,role="copypaste"]
 ----
@@ -28,9 +28,9 @@ public class CopyMeDirectly {
 }
 ----
 
-上記をクリックするとブロック全体がクリップボードにコピーされ、 Windowsなら、[CTRL+V] Macなら[Command+V] でペーストできます。
+上記をクリックするとブロック全体がクリップボードにコピーされ、 Windowsなら [CTRL+V] 、Macなら[Command+V] でペーストできます。
 
-また、Linuxのシェルコマンドもあり、これも開発環境のターミナルにコピー＆ペーストすることができます:
+また、Linuxのシェルコマンドもあり、これも開発環境のターミナルにコピー＆ペーストすることができます。
 
 [source,sh,role="copypaste"]
 ----
@@ -40,7 +40,7 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 [#wsenvironment]
 == ワークショップ環境の構成について
 
-ワークショップの環境は、以下で構成されています。:
+ワークショップの環境は、以下で構成されています。
 
 * https://www.OpenShift.com/[Red Hat OpenShift,window=_blank] - 本ワークショップの実行環境です。
 * https://developers.redhat.com/products/OpenShift-dev-spaces/overview[Red Hat OpenShift Dev Spaces,window=_blank] - 本ワークショップの開発環境です。Visual StudioライクなWebブラウザで利用できるIDE環境です。OpenShift Dev Spacesは、OpenShiftに含まれて提供されています。
@@ -48,11 +48,12 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 
 
 === ワークショップ環境のアクセス確認とレポジトリのgit clone
-開発環境にアクセスします, {{ CHE_URL }}[開発環境にアクセスし^] ユーザ名とパスワードを入力します (例 `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`):
+開発環境にアクセスします。
+ {{ CHE_URL }}[開発環境にアクセスし^] ユーザ名とパスワードを入力します (例 `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`)
 
 image::che-login.png[cdw, 700, align="center"]
 
-ログインし、左メニューのワークスペースをクリックすると、開発環境が開きます。
+ログインし、左メニューのワークスペース (例 `{{ USER_ID }}-workspace`) をクリックすると、開発環境が開きます。
 
 左側には、プロジェクトエクスプローラー、検索、バージョン管理（Gitなど）、デバッグ、その他のプラグインのアイコンが表示されています。
 
@@ -60,14 +61,14 @@ image::crw-icons.png[cdw, 400, align="center"]
 
 [NOTE]
 ====
-もし、開発環境が不安定になったりした場合は、、ブラウザ上でリロードしてください。
+もし、開発環境が不安定になったりした場合は、ブラウザ上でリロードしてください。
 ====
 
-今回のワークショップに必要なプロジェクトをインポートします。 **Git Clone..** をクリックします。
+今回のワークショップに必要なプロジェクトをインポートします。 "Welcome To Your Workspace" の直下に表示されている ** "New" > "Git Clone..."** をクリックします。
 
 image::gitclonepage.png[cdw, 600, align="center"]
 
-レポジトリURLには、下記のURLをコピーしてペーストしてください。
+レポジトリURLには下記のURLをコピー&ペーストして、Enter キーまたは return キーを押下することにより、任意のフォルダ配下にプロジェクトをインポートしてください。
 
 [source, shell, role="copypaste"]
 ----
