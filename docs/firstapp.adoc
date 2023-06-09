@@ -1,27 +1,21 @@
 [#firstapp-project]
 === Java Script Client Adapterについて
-RH-SSOには、HTML5/JavaScriptアプリケーションのセキュリティ確保に使用できるクライアントサイドJavaScriptライブラリが付属しています。
-今回のアプリでは、このライブラリを使っており、Web画面上でアクセストークンなどをアプリケーション側でどう見えるかが簡単に確認できるものになっています。
+Red Hat SSO には、HTML5/JavaScriptアプリケーションのセキュリティ確保に使用できるクライアントサイドJavaScriptライブラリが付属しています。
+今回の JavaScript アプリケーションでは、このクライアントライブラリを使っており、Web画面上でアクセストークンなどをアプリケーション側でどう見えるかを簡単に確認できるものになっています。
 
-開発環境の画面に移動して、 ターミナルで `js-console`　のディレクトリに移動します。
-[source, js,role="copypaste"]
-----
-cd js-console
-----
 
 [#firstapp-authentication]
 === JavaScirptによる認証
-SSOを実現するには、アプリケーション側に、RH-SSOのURLを設定する必要があります。
+シングルサインオンを実現するには、JavaScript アプリケーション側に Red Hat SSO のURLを設定する必要があります。
 
-SSOサーバーのURLをコピーしておきます：
-OpenShiftのコマンドでSSOサーバーのホスト名は取得できます(https://は含まれてません)：
+Red Hat SSO サーバーのURLをコピーしておきます。OpenShiftのコマンドで Red Hat SSO サーバーのホスト名は取得できます。
 ```
 > oc get route sso
 NAME   HOST/PORT                                              PATH   SERVICES   
 sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 ```
 
-`src/keycloak.json` ファイルを編集します。
+開発環境 (Red Hat CodeReady Workspace) 画面から `src/keycloak.json` ファイルを編集します。
 
 以下の "auth-server-url" をSSOサーバのURLに変更します。
 [source, js,role="copypaste"]
@@ -34,7 +28,7 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 
 ----
 
-次に、 `src/index.html` を開き、<header> <src>のSERVER_URLの部分を置き換えます。
+次に、 `src/index.html` を開き、<header> <src>の SERVER_URL の部分を置き換えます。
 
 サーバーのURLは、以下のようになります。
 
@@ -45,34 +39,32 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 
 ----
 
+基本的な設定ができたので、JavaScript アプリケーションを OpenShift 上にデプロイしていきます。
+OpenShift の S2I（Source-to-Image）という機能を使って、ソースコードから JavaScirpt アプリケーションが格納されたコンテナを作成します。また、OpenShiftでデフォルトで提供されている httpd(Apache HTTP Server) のコンテナイメージに、今回の JavaScript アプリケーションを格納しています。
 
-基本的な設定ができたので、アプリケーションをデプロイしていきます。
-OpenShiftのS2i（Source2Image）という機能を使って、ソースコードからコンテナを作成します。
-また、OpenShiftでデフォルトで提供されているhttpd(Apache Web Server)に、今回のJavaScriptを格納します。
-
-`js-console/src` に移動して以下のコマンドを実行します。
+開発環境のターミナルから、以下のコマンドを用いて `js-console/src` ディレクトリに移動してコンテナイメージをビルドするためのビルド定義を作成します。
 
 [source, bash,role="copypaste"]
 ----
-
+cd js-console/src
 oc new-build --name js-console --binary --strategy source --image-stream httpd
 ----
 
-ビルドを開始します。以下のコマンドでは、ビルドがローカルのソースディレクトリから行われることを指定しています。
+ビルドを開始します。以下のコマンドでは `js-console/src` ディレクトリ配下のファイルをビルドしています。
 
 [source, bash,role="copypaste"]
 ----
 oc start-build js-console --from-dir . --follow
 ----
 
-ビルドが成功したら、そのビルドで新しいアプリを作成します。これがjs-consoleアプリになります。
+ビルドが成功したら、作成されたコンテナイメージを用いてアプリケーションをデプロイします。
 
 [source, bash,role="copypaste"]
 ----
 oc new-app --image-stream=js-console:latest
 ----
 
-そして、最後にjs-consoleアプリのサービスのルートを公開し、ブラウザから接続できるようにします。
+そして、最後にデプロイされた JavaScript アプリケーションを OpenShift クラスタ外のネットワークからアクセス可能にし、ブラウザからアクセスできるようにします。
 
 [source, bash,role="copypaste"]
 ----
@@ -85,42 +77,30 @@ image::OpenShift-first-deployment.png[First deployment, 1024]
 
 OpenShiftコンソール上で、`js-console` が表示されるはずです。
 アイコンの右上にアクセスすると、エラーになっていまいます。
-もっと設定を行う必要があります。お気づきかもしれませんが、js-consoleアプリのRH-SSO側の設定まだしていないためです。次にRH-SSO側の設定していきます。
+もっと設定を行う必要があります。お気づきかもしれませんが、JavaScript アプリケーションの Red Hat SSO 側の設定まだしていないためです。次に Red Hat SSO 側の設定をしていきます。
 
-RH-SSO管理画面の左のメニューバー `Client` をクリックします。(認証認可の世界では、SSOで連携するアプリケーションをClientと呼びます)
-次に、`Create` ボタンをクリックします。
-
-設定には、js-consoleのURLが必要になります。開発環境の画面のターミナルから、次のコマンドで取得します。
+設定には、JavaScript アプリケーションのURLが必要になります。開発環境の画面のターミナルから、次のコマンドで取得します。
 
 [source, bash,role="copypaste"]
 ----
 oc get route js-console
 ----
 
+Red Hat SSO 管理画面の左のメニューバーから `Clients` をクリックします。(認証認可の世界では、シングルサインオンで連携するアプリケーションことを Client と呼びます)
+次に、`Create` ボタンをクリックします。
+
 フォームに必要事項を入力し（例：以下の画面）、 `save` をクリックします。
-js-consoleアプリのURLには、 "http://" を先頭につけてください (例: "http://js-console-evals01-sso-kubernetes-workshop.apps.cph-5a34.open.redhat.com" )
+JavaScript アプリケーションのURLには、 "http://" を先頭につけてください。
+(例: "http://js-console-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}" )
 
 image::sso_adminclientconfig.png[Realm Client settings]
 
-JS Consoleアプリを再読み込みしてください。ログインページにリダイレクトされるはずです。
-ログインすると、次のコンソールが表示され、登録したユーザー名が表示されます。
-JS Consoleアプリ上にある `Access Token` `Access JSON Token` をクリックしてください。
-Access Tokenは、 RH-SSOから取得したアクセストークンになります。
-Access JSON Tokenは、アクセストークンをbase64デコードしたJWTの内容になります。
-
+JavaScript アプリケーションを再読み込みしてください。ログインページにリダイレクトされるはずです。
+ユーザー登録したユーザー名・パスワードを用いてログインすると、次のコンソールが表示され、登録したユーザー名が表示されます。
+JavaScript アプリケーション上にある `Access Token` `Access JSON Token` をクリックしてください。
+Access Tokenは、 Red Hat SSO から取得したアクセストークンになります。
+Access JSON Tokenは、アクセストークンをbase64デコードした JWT (Json Web Token) の内容になります。
 
 image::sso_demojsconsole.png[JS Console]
 
 おつかれさまです！
-
-
-
-
-
-
-
-
-
-
-
-
