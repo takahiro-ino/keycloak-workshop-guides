@@ -42,7 +42,7 @@ image::sso_install.png[SSO install Config]
 image::sso_installed.png[SSO installed]
 
 Red Hat SSO がインストールが完了したら、Red Hat SSO の管理画面にログインしてみます。
-アイコンの右上のをクリックし、'Welcome to Red Hat Single Sign-On' 画面が表示されたら 'Adminstration Console' をクリックします。
+アイコンの右上をクリックし、'Welcome to Red Hat Single Sign-On' 画面が表示されたら 'Adminstration Console' をクリックします。
 Adminstration Console へのログインは、先程 'テンプレートのインスタンス化' にて入力して Username/Password を入力します。
 
 * Username or email: `admin`
