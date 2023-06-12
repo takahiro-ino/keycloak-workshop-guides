@@ -1,5 +1,5 @@
 id: "sso-workshop"
-name: "hands on"
+name: "Red Hat SSO ハンズオン"
 
 content:
   url: https://github.com/RedHat-Middleware-Workshops/sso-workshop-guides.git
