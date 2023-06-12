@@ -8,6 +8,13 @@ Red Hat SSO には、HTML5/JavaScriptアプリケーションのセキュリテ�
 === JavaScirptによる認証
 シングルサインオンを実現するには、JavaScript アプリケーション側に Red Hat SSO のURLを設定する必要があります。
 
+前節において「メール連携の設定 (オプション)」を実施していない場合には、開発環境 (Red Hat CodeReady Workspace) の画面の右側にあるワークベンチアイコンをクリックし、ターミナルを立ち上げます。
+
+image::crw_right_workbench.png[Workbench]
+
+1.  `Login to OpenShift` をクリックします。
+2.  `New Terminal` をクリックします。
+
 Red Hat SSO サーバーのURLをコピーしておきます。OpenShiftのコマンドで Red Hat SSO サーバーのホスト名は取得できます。
 ```
 > oc get route sso
@@ -15,7 +22,7 @@ NAME   HOST/PORT                                              PATH   SERVICES
 sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 ```
 
-開発環境 (Red Hat CodeReady Workspace) 画面から `src/keycloak.json` ファイルを編集します。
+開発環境の画面から `js-console/src/keycloak.json` ファイルを編集します。
 
 以下の "auth-server-url" をSSOサーバのURLに変更します。
 [source, js,role="copypaste"]
@@ -28,7 +35,7 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 
 ----
 
-次に、 `src/index.html` を開き、<header> <src>の SERVER_URL の部分を置き換えます。
+次に、 `js-console/src/index.html` を開き、<header> <src>の SERVER_URL の部分を置き換えます。
 
 サーバーのURLは、以下のようになります。
 
@@ -42,7 +49,7 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 基本的な設定ができたので、JavaScript アプリケーションを OpenShift 上にデプロイしていきます。
 OpenShift の S2I（Source-to-Image）という機能を使って、ソースコードから JavaScirpt アプリケーションが格納されたコンテナを作成します。また、OpenShiftでデフォルトで提供されている httpd(Apache HTTP Server) のコンテナイメージに、今回の JavaScript アプリケーションを格納しています。
 
-開発環境のターミナルから、以下のコマンドを用いて `js-console/src` ディレクトリに移動してコンテナイメージをビルドするためのビルド定義を作成します。
+開発環境のターミナルから、以下のコマンドを用いて `js-console/src` ディレクトリに移動し、コンテナイメージをビルドするためのビルド定義を作成します。
 
 [source, bash,role="copypaste"]
 ----
@@ -76,8 +83,7 @@ oc expose svc/js-console
 image::OpenShift-first-deployment.png[First deployment, 1024]
 
 OpenShiftコンソール上で、`js-console` が表示されるはずです。
-アイコンの右上にアクセスすると、エラーになっていまいます。
-もっと設定を行う必要があります。お気づきかもしれませんが、JavaScript アプリケーションの Red Hat SSO 側の設定まだしていないためです。次に Red Hat SSO 側の設定をしていきます。
+アイコンの右上の「URLを開く」をクリックすると、エラーになっていまいます。もう少し設定を行う必要があります。お気付きかもしれませんが、JavaScript アプリケーションの Red Hat SSO 側の設定まだしていないためです。次に Red Hat SSO 側の設定をしていきます。
 
 設定には、JavaScript アプリケーションのURLが必要になります。開発環境の画面のターミナルから、次のコマンドで取得します。
 
