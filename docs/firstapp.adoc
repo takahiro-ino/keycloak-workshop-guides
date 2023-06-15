@@ -1,12 +1,12 @@
 [#firstapp-project]
 === Java Script Client Adapterについて
 Red Hat SSO には、HTML5/JavaScriptアプリケーションのセキュリティ確保に使用できるクライアントサイドJavaScriptライブラリが付属しています。
-今回の JavaScript アプリケーションでは、このクライアントライブラリを使っており、Web画面上でアクセストークンなどをアプリケーション側でどう見えるかを簡単に確認できるものになっています。
+今回の JavaScript Console アプリケーションでは、このクライアントライブラリを使っており、Web画面上でアクセストークンなどをアプリケーション側でどう見えるかを簡単に確認できるものになっています。
 
 
 [#firstapp-authentication]
 === JavaScirptによる認証
-シングルサインオンを実現するには、JavaScript アプリケーション側に Red Hat SSO のURLを設定する必要があります。
+シングルサインオンを実現するには、JavaScript Console アプリケーション側に Red Hat SSO のURLを設定する必要があります。
 
 前節において「メール連携の設定 (オプション)」を実施していない場合には、開発環境 (Red Hat CodeReady Workspace) の画面の右側にあるワークベンチアイコンをクリックし、ターミナルを立ち上げます。
 
@@ -46,8 +46,8 @@ sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
 
 ----
 
-基本的な設定ができたので、JavaScript アプリケーションを OpenShift 上にデプロイしていきます。
-OpenShift の S2I（Source-to-Image）という機能を使って、ソースコードから JavaScirpt アプリケーションが格納されたコンテナを作成します。また、OpenShiftでデフォルトで提供されている httpd(Apache HTTP Server) のコンテナイメージに、今回の JavaScript アプリケーションを格納しています。
+基本的な設定ができたので、JavaScript Console アプリケーションを OpenShift 上にデプロイしていきます。
+OpenShift の S2I（Source-to-Image）という機能を使って、ソースコードから JavaScirpt アプリケーションが格納されたコンテナを作成します。また、OpenShiftでデフォルトで提供されている httpd(Apache HTTP Server) のコンテナイメージに、今回の JavaScript Console アプリケーションを格納しています。
 
 開発環境のターミナルから、以下のコマンドを用いて `js-console/src` ディレクトリに移動し、コンテナイメージをビルドするためのビルド定義を作成します。
 
@@ -71,7 +71,7 @@ oc start-build js-console --from-dir . --follow
 oc new-app --image-stream=js-console:latest
 ----
 
-そして、最後にデプロイされた JavaScript アプリケーションを OpenShift クラスタ外のネットワークからアクセス可能にし、ブラウザからアクセスできるようにします。
+そして、最後にデプロイされた JavaScript Console アプリケーションを OpenShift クラスタ外のネットワークからアクセス可能にし、ブラウザからアクセスできるようにします。
 
 [source, bash,role="copypaste"]
 ----
@@ -83,7 +83,7 @@ oc expose svc/js-console
 image::OpenShift-first-deployment.png[First deployment, 1024]
 
 OpenShiftコンソール上で、`js-console` が表示されるはずです。
-アイコンの右上の「URLを開く」をクリックすると、エラーになっていまいます。もう少し設定を行う必要があります。お気付きかもしれませんが、JavaScript アプリケーションの Red Hat SSO 側の設定まだしていないためです。次に Red Hat SSO 側の設定をしていきます。
+アイコンの右上の「URLを開く」をクリックすると、エラーになっていまいます。もう少し設定を行う必要があります。お気付きかもしれませんが、JavaScript Console アプリケーションの Red Hat SSO 側の設定まだしていないためです。次に Red Hat SSO 側の設定をしていきます。
 
 設定には、JavaScript アプリケーションのURLが必要になります。開発環境の画面のターミナルから、次のコマンドで取得します。
 
@@ -96,17 +96,17 @@ Red Hat SSO 管理画面の左のメニューバーから `Clients` をクリッ
 次に、`Create` ボタンをクリックします。
 
 フォームに必要事項を入力し（例：以下の画面）、 `save` をクリックします。
-JavaScript アプリケーションのURLには、 "http://" を先頭につけてください。
+JavaScript Console アプリケーションのURLには、 "http://" を先頭につけてください。
 (例: "http://js-console-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}" )
 
 image::sso_adminclientconfig.png[Realm Client settings]
 
-JavaScript アプリケーションを再読み込みしてください。ログインページにリダイレクトされるはずです。
+JavaScript Console アプリケーションを再読み込みしてください。ログインページにリダイレクトされるはずです。
 ユーザー登録したユーザー名・パスワードを用いてログインすると、次のコンソールが表示され、登録したユーザー名が表示されます。
-JavaScript アプリケーション上にある `Access Token` `Access JSON Token` をクリックしてください。
+JavaScript Console アプリケーション上にある `Access Token` `Access JSON Token` をクリックしてください。
 Access Tokenは、 Red Hat SSO から取得したアクセストークンになります。
 Access JSON Tokenは、アクセストークンをbase64デコードした JWT (Json Web Token) の内容になります。
 
 image::sso_demojsconsole.png[JS Console]
 
-おつかれさまです！
+これで、JavaScript Console アプリケーションに対して、Red Hat SSO を用いてシングルサインオンを実現することができました。

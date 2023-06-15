@@ -65,7 +65,7 @@ image::crw_right_workbench.png[Workbench]
 1.  `Login to OpenShift` をクリックします。
 2.  `New Terminal` をクリックします。
 
-New Terminalで開いたターミナルで、以下のコマンドを実行します。
+New Terminalで開いたターミナルにおいて、以下のコマンドを実行します。
 
 [source,bash,role="copypaste"]
 ----
