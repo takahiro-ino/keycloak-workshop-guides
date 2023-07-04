@@ -47,7 +47,7 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 * https://www.redhat.com/en/products/runtimes[Red Hat Runtimes, window=_blank] - JBoss EAP、SpringBootやQuakusなどのアプリケーションフレームワーク、ランタイムです。 Red Hat Runtimeの中に、今回のワークショップで利用するRed Hat SSO(Keycloak)も含まれています。
 
 
-=== ワークショップ環境のアクセス確認とレポジトリのgit clone
+=== ワークショップ環境のアクセス確認
 開発環境にアクセスします。
  {{ CHE_URL }}[開発環境にアクセスし^] ユーザ名とパスワードを入力します (例 `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`)
 
@@ -63,21 +63,5 @@ image::crw-icons.png[cdw, 400, align="center"]
 ====
 もし、開発環境が不安定になったりした場合は、ブラウザ上でリロードしてください。
 ====
-
-今回のワークショップに必要なプロジェクトをインポートします。 "Welcome To Your Workspace" の直下に表示されている ** "New" > "Git Clone..."** をクリックします。
-
-image::gitclonepage.png[cdw, 600, align="center"]
-
-レポジトリURLには下記のURLをコピー&ペーストして、Enter キーまたは return キーを押下することにより、任意のフォルダ配下にプロジェクトをインポートしてください。
-
-[source, shell, role="copypaste"]
-----
-https://github.com/RedHat-Middleware-Workshops/keycloak-workshop-labs
-
-----
-
-image::gitclone.png[crw, 600, align="center"]
-
-これで、プロジェクトがワークスペースにインポートされました。
 
 次のステップに進むには、画面右下の青いボタンをクリックしてください。

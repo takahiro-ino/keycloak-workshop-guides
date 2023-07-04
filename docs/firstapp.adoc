@@ -3,6 +3,24 @@
 Red Hat SSO には、HTML5/JavaScriptアプリケーションのセキュリティ確保に使用できるクライアントサイドJavaScriptライブラリが付属しています。
 今回の JavaScript Console アプリケーションでは、このクライアントライブラリを使っており、Web画面上でアクセストークンなどをアプリケーション側でどう見えるかを簡単に確認できるものになっています。
 
+[#firstapp-gitclone]
+=== レポジトリの Git Clone
+{{ CHE_URL }}[開発環境にアクセスし^] 、今回のワークショップに必要なプロジェクトをインポートします。 "Welcome To Your Workspace" の直下に表示されている ** "New" > "Git Clone..."** をクリックします。
+
+image::gitclonepage.png[cdw, 600, align="center"]
+
+レポジトリURLには下記のURLをコピー&ペーストして、Enter キーまたは return キーを押下することにより、任意のフォルダ配下にプロジェクトをインポートしてください。
+
+[source, shell, role="copypaste"]
+----
+https://github.com/RedHat-Middleware-Workshops/keycloak-workshop-labs
+
+----
+
+image::gitclone.png[crw, 600, align="center"]
+
+これで、プロジェクトがワークスペースにインポートされました。
+
 
 [#firstapp-authentication]
 === JavaScirptによる認証
