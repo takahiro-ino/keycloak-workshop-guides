@@ -51,6 +51,8 @@ Red Hat SSO では、クライアントスコープと呼ばれ機能で共有�
 
 <4> `Attributes` タブをクリックし、 Keyに `avatar_url` を入力し、`value` に `https://www.keycloak.org/resources/images/keycloak_logo_200px.svg` を入力し、右側の `Add` をクリックします。
 
+image::add_attributes.png[Add Attributes]
+
 <5> `Save` をクリックします。
 
 ユーザの属性にアバターを設定したので、次はアプリケーション側を設定してトークンに追加されるようにします。
@@ -62,6 +64,8 @@ Red Hat SSO では、クライアントスコープと呼ばれ機能で共有�
 * Name: `avatar`
 * Consent Screen Text: `Avatar`
 
+image::add_client_scope.png[Add Client Scope]
+
 - `Save` をクリックします。同じ画面上にある `Mappers` タブをクリックして、 `Create` をクリックします。
 
 以下の値を入力します:
@@ -72,6 +76,8 @@ Red Hat SSO では、クライアントスコープと呼ばれ機能で共有�
 * Token Claim Name: `avatar_url`
 * Claim JSON Type: `String`
 
+image::create_protocol_mapper.png[Create Protocol Mapper]
+
 - `Save` をクリックします。
 
 クライアントスコープを作成しましたが、これは共通定義なので、アプリケーションの `js-console` にも変更を反映させる必要があります。
@@ -80,7 +86,11 @@ Red Hat SSO では、クライアントスコープと呼ばれ機能で共有�
 
 - Default Client Scope として追加します。ここでは `avatar` を選択し、`Add selected` をクリックします。デフォルトのスコープなので、デフォルトでクライアントスコープがトークンに追加されます。
 
+image::add_default_client_scope.png[Add Default Client Scope]
+
 - 次に、JavaScript Console アプリケーションの画面に戻り、`refresh` をクリックします。JavaScript Console アプリケーションのメインダッシュボードにアバターとして keycloak のロゴが表示されます。
+
+image::keycloak_logo.png[Keycloak Logo]
 
 - `Access Token JSON` をクリックすると、トークンに追加された内容が表示されます。 以下のように `Access Token JSON` に `avatar_url` 属性が追加されていることが分かります。
 
