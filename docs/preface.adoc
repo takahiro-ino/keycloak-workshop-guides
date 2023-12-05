@@ -49,19 +49,51 @@ echo "This is a bash shell command that you can copy/paste by clicking"
 
 === ワークショップ環境のアクセス確認
 開発環境にアクセスします。
- {{ CHE_URL }}[開発環境にアクセスし^] ユーザ名とパスワードを入力します (例 `{{ USER_ID }}/{{ CHE_USER_PASSWORD }}`)
+ {{ CHE_URL }}[開発環境にアクセスし^]  *Log in with OpenShift* ボタンを押します。
 
-image::che-login.png[cdw, 700, align="center"]
+image::login_with_openshift.png[login,800]
 
-ログインし、左メニューのワークスペース (例 `{{ USER_ID }}-workspace`) をクリックすると、開発環境が開きます。
+次に、ユーザ名とパスワードを入力します 
+* *Username*: `{{ USER_ID }}`
+* *Password*: `{{ CHE_USER_PASSWORD }}`
 
-左側には、プロジェクトエクスプローラー、検索、バージョン管理（Gitなど）、デバッグ、その他のプラグインのアイコンが表示されています。
-
-image::crw-icons.png[cdw, 400, align="center"]
+image::che-login.png[login,800]
 
 [NOTE]
 ====
-もし、開発環境が不安定になったりした場合は、ブラウザ上でリロードしてください。
+以下のような *Authorize Access* ページが表示されたら, *Allow selected permissions* ボタンを選択します。
+
+image::auth-access.png[auth-access, 800]
 ====
+
+ログインすると,  *Create Workspace* ダッシュボードが表示されます。 以下の `Git Repo URL` をコピーし、`Create & Open` を選択してください。
+
+* *Git Repo URL*: `https://github.com/RedHat-Middleware-Workshops/keycloak-workshop-labs.git`
+
+image::ds-landing.png[ds, 800]
+
+ウェブブラウザの新しいウィンドウまたはタブが自動的に開き *Starting workspace quarkus-workshop* に関する進行状況が表示されます。処理が完了するまで、およそ60秒かかります。
+
+image::starting-workspace.png[ds, 800]
+
+[NOTE]
+====
+下記のページが表示された場合は、 `Start your workspace` を選択します。
+
+image::starting-workspace-info.png[ds, 800]
+====
+
+数秒後、ワークスペースに移動します。
+
+image::ds-workspace.png[ds, 800]
+
+[NOTE]
+====
+下記のページが表示された場合は、 `Trust the authors of all files in the parent folder 'projects'` にチェックを入れてください。次に、 `Yes, I trust the authors. Trust folder and enable all features` を選択してください。
+
+image::ds-trust-popup.png[ds, 800]
+====
+
+このワークショップを実施中は、このブラウザ(またはタブ)はずっと開いたままにしておいてください。もし、開発環境が不安定になったりした場合は、ブラウザ上でリロードしてください。
 
 次のステップに進むには、画面右下の青いボタンをクリックしてください。
