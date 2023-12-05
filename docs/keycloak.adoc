@@ -16,9 +16,10 @@ image::openshift_login.png[openshift_login, 700]
 === Red Hat SSO のインストール
 Red Hat SSO のインストールを実施します。
 
-<1> 左メニューの `+追加` をクリックし、 Red Hat SSO インストール先のプロジェクトとして '{{ USER_ID }}-keycloak' を選択します。
-<2> `開発者カタログ` から `すべてのサービス` をクリックします。
-<3> 検索ボックスに `SSO` と入力します。
+<1> 左メニュー上の `開発者向け表示` をクリックします。(最初から、開発者向け表示の場合、本操作は不要です)
+<2> 左メニューの `+追加` をクリックし、 Red Hat SSO インストール先のプロジェクトとして '{{ USER_ID }}-keycloak' を選択します。
+<3> `開発者カタログ` から `すべてのサービス` をクリックします。
+<4> 検索ボックスに `SSO` と入力します。
 
 image::OpenShift-sso_search.png[Search for SSO]
 
