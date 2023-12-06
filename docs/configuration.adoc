@@ -93,15 +93,15 @@ image::sso_otp3.png[otp3]
 以下は、FreeOTPでの操作となります。
 FreeOTPを起動し、QRスキャンボタンを押します。
 
-image::free_otp1.png[free_otp1, 800]
+image::free_otp1.png[free_otp1, 400]
 
 スマートフォンでRH-SSOの画面のQRコードをスキャンし、いくつかボタンを押すと、FreeOTPにレルム名(demojs)で登録されます。
 
-image::free_otp2.png[free_otp2, 800]
+image::free_otp2.png[free_otp2, 400]
 
 スマートフォンのFreeOTPに登録されたレルム名(demojs)をクリックすると、ワンタイムパスワードが表示されます。
 
-image::free_otp3.png[free_otp3, 800]
+image::free_otp3.png[free_otp3, 400]
 
 スマートフォンのFreeOTPで表示されたワンタイムパスワードとデバイス名(何でも良い)をRH-SSOの画面に入力し、 `Submit` をクリックし、登録します。
 
