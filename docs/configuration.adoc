@@ -40,14 +40,20 @@ image::sso_login.png[Login]
 
 `User Registration` を有効にし、`Save` をクリックします。
 
-image::sso_login2.png[Login]
+image::sso_login2.png[Login2]
 
 プライバシーモードで新しいブラウザセッションを開くか、別のブラウザを開いてください。Red Hat SSO には、アカウント管理画面があり、そこからアカウントを登録します。
 
 * アカウント管理画面: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs/account
 
 1. アカウント管理画面の右上の `Sing-in` をクリックすると、 ログイン画面が表示されます。
+
+image::sso_siginin.png[siginin]
+
 2. `register` をクリックし、適当にユーザ情報を入力してください。
+
+image::sso_siginin.png[siginin2]
+
 
 これでユーザー登録を行い、登録したユーザーで Demojs レルムにログインすることができました。
 
