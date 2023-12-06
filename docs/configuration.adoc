@@ -50,111 +50,66 @@ image::sso_login2.png[Login2]
 
 image::sso_siginin.png[siginin]
 
-適当にユーザ情報を入力し、 `register` をクリックしてください。
+`register` をクリックしてください。
 
 image::sso_siginin2.png[siginin2]
 
+ユーザ登録画面が表示されます。各項目を適当に入力してください。(メールアドレスはhoge@hogeのようにドメインが必要です)
+
+image::sso_siginin3.png[siginin3]
 
 これでユーザー登録を行い、登録したユーザーで Demojs レルムにログインすることができました。
 
+image::sso_siginin4.png[siginin4]
 
-[#email-integration]
-=== メール連携の設定 (オプション)
-本セクションの実施はオプションです。本ハンズオンを一通り実施完了し、時間が余ることを確認できてから実施してください。
 
-Red Hat SSO では、よくある初回ログイン時に認証メールを送信することができます。
+[#config-OTP]
+=== ワンタイムパスワード（OTP）の設定
+Red Hat SSO では、ワンタイムパスワード（OTP）が利用できます。
+具体的には、スマートフォンアプリのFreeOTPとGoogle Authenticatorが利用可能です。
+以降の手順では、スマートフォンに、FreeOTPとGoogle Authenticatorが必要なため、お手持ちのスマートフォンにいずれかをインストールしておく必要があります。
 
-まずは、テストに使うだけのメールサーバーをセットアップしましょう。MailCatcher はシンプルな SMTP サーバーで、送られてきたメッセージをすべてキャッチして Web インターフェースに表示します。
-MailCatcherを実行することで、テスト用に設定したすべてのメールを取得することができます。
-メールサーバーはポート "1025" でセットアップされ、メッセージの送受信確認ための Web インターフェースはポート "8080" で設定します。
+ワンタイムパスワード（OTP）の設定を実施します。
+さきほどのアカウント管理画面から、 `Personal Info` をクリックしてください。
 
-開発環境の画面に移動して、次のコマンドを実行して、テスト用メールサーバーを作成します。
-画面の右側にあるワークベンチアイコンをクリックします。
+image::sso_otp1.png[otp1]
 
-image::crw_right_workbench.png[Workbench]
+Personal Info画面の左ペインから、 `Account Security` をクリックし、さらに `Signing In` をクリックし、
+Signing In画面の `Set up Autehnticator Application` をクリックします。
 
-1.  `Login to OpenShift` をクリックします。
-2.  `New Terminal` をクリックします。
+image::sso_otp2.png[otp2]
 
-New Terminalで開いたターミナルにおいて、以下のコマンドを実行します。
+[NOTE]
+====
+下記のページが表示された場合は、さきほど入力したユーザ名とパスワードを入力し、`Sing in` をクリックしてください。
 
-[source,bash,role="copypaste"]
-----
-oc new-app quay.io/sshaaf/mailcatcher --name=mailcatcher
-oc expose svc/mailcatcher --port 8080
-----
+image::sso_otp2-1.png[otp2-1]
+====
 
-コマンドの説明
+以下のようにQRコードが画面に表示されます。お手持ちのスマートフォンのFreeOTPとGoogle Authenticatorから、QRコードをスキャンします。
 
-1. 最初のコマンドでメールキャッチャーサーバーをデプロイします
-2. 2つ目のコマンドは、受信したメールを見るためのhttpエンドポイントを設定するために、8080番ポートを公開します。
+image::sso_otp3.png[otp3]
 
-デプロイが完了すると、OpenShiftのコンソールで次のように表示されます。
+以下は、FreeOTPでの操作となります。
+FreeOTPを起動し、QRスキャンボタンを押します。
 
-image::OpenShift_mailcatcherinstalled.png[Mailcatcher]
+image::free_otp1.png[free_otp1]
 
-Red Hat SSO 側の管理画面で設定をします。
-まず、管理者用メールアカウントを追加します。
-SSO 管理コンソールにログインしていることを確認し、SSO 管理コンソールの右端にあるメニューをクリックします。
+スマートフォンでRH-SSOの画面のQRコードをスキャンし、いくつかボタンを押すと、FreeOTPにレルム名(demojs)で登録されます。
 
-`Manage account` をクリックすると、管理者ユーザープロファイルが表示されます。
+image::free_otp2.png[free_otp2]
 
-image::sso_adminprofile.png[Admin profile]
+スマートフォンのFreeOTPに登録されたレルム名(demojs)をクリックすると、ワンタイムパスワードが表示されます。
 
-Personal Info画面が開いて、メールアドレスとFirst nameとLast nameを入力します。
+image::free_otp3.png[free_otp3]
 
-* Email: `admin@mysso.com`
-* First name:  適当でOK
-* Last name: 適当でOK
+スマートフォンのFreeOTPで表示されたワンタイムパスワードとデバイス名(何でも良い)をRH-SSOの画面に入力し、 `Submit` をクリックし、登録します。
 
-完了したら、 `Save` ボタンを押して、`Back to Security Admin Console` に戻るをクリックします。
+image::sso_otp4.png[otp4]
 
-次に、左側メニューの `realm settings` をクリックし、 `Email` タブをクリックします。先程設定した内容を入力します。
+登録が完了すると、Personal Info画面でさきほど入力したデバイス名で、登録されていることがわかります。
 
-* Host: `mailcatcher`
-* Port: `1025`
-* From: `admin@mysso.com`
 
-image::sso_adminemailconfig.png[Realm Email config]
 
-`Save` をクリックします。
-
-では、早速テストしてみましょう。
-`Test Connection` を押すと、設定がうまくいったかどうかが報告されます。
-成功した場合、「[KEYCLOAK] - SMTP test message」などの件名で、メールが届きます。
-
-OpenShiftコンソールの mailcatcher の右上のアイコンをクリックすると、メールが確認できます。
-
-image::mailcatcher_ui.png[Email config]
-
-これで、Red Hat SSO でのメールサーバーの設定は完了です。
-
-では、次に Red Hat SSO の管理コンソールから `Login` タブに移動します。
-
-image::sso_adminloginconfig.png[Realm Login settings]
-
-以下を有効にします:
-
-1. `User Registration` 新しいユーザーがSSOに登録可能にします。
-2. `Verify Email` メールによるユーザーを確認を有効化します。
-
-`Save` をクリックします。
-
-それでは、この設定をテストしていきます。
-プライバシーモードで新しいブラウザセッションを開くか、別のブラウザを開いてください。
-
-* アカウント管理画面: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs/account
-
-1. アカウント管理画面の右上の `Sing-in` をクリックすると、 ログイン画面が表示されます。
-2. `register` をクリックし、適当にユーザ情報を入力してください。
-3. 新しく作成されたユーザーを確認するためにメールが送信されるので、mailcatcherに送信されます。
-
-ユーザ登録が完了すると、以下の画面が表示されます。
-
-image::sso_adminemailverify.png[Realm Login settings]
-
-mailcatcher にアクセスすると、新しい電子メールが届いているはずです。
-メールに記載されているリンクをクリックし、新しいユーザーを確認します。これで、新しいユーザで管理コンソールにログインできるはずです。（確認メールのリンクをコピーして、ユーザ登録したブラウザ側で開いてください）
-
-さて、これで Red Hat SSO サーバーとそのレルムの基本的な設定ができました。
-次の章では、最初のアプリケーションをデプロイし、Red Hat SSO を用いてシングルサインオンを実現するように設定します。
+さて、これで Red Hat SSO サーバーのユーザ登録とOTPの設定ができました。
+次の章では、Quarkusアプリケーションをデプロイし、Red Hat SSO を用いてシングルサインオンを実現するように設定します。
