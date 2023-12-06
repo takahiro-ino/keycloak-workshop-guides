@@ -109,7 +109,7 @@ image::sso_otp4.png[otp4]
 
 登録が完了すると、Personal Info画面でさきほど入力したデバイス名で、登録されていることがわかります。
 
-
+image::sso_otp5.png[otp5]
 
 さて、これで Red Hat SSO サーバーのユーザ登録とOTPの設定ができました。
 次の章では、Quarkusアプリケーションをデプロイし、Red Hat SSO を用いてシングルサインオンを実現するように設定します。
