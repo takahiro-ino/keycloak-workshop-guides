@@ -42,7 +42,7 @@ image::sso_login.png[Login]
 
 image::sso_login2.png[Login2]
 
-プライバシーモードで新しいブラウザセッションを開くか、別のブラウザを開いてください。Red Hat SSO には、アカウント管理画面があり、そこからアカウントを登録します。
+Red Hat SSO には、アカウント管理画面があり、そこからアカウントを登録します。
 
 * アカウント管理画面: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs/account
 
