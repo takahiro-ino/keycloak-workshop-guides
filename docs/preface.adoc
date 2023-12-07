@@ -69,7 +69,7 @@ image::auth-access.png[auth-access, 800]
 
 ログインすると,  *Create Workspace* ダッシュボードが表示されます。 以下の `Git Repo URL` をコピーし、`Create & Open` を選択してください。
 
-* *Git Repo URL*: `https://github.com/RedHat-Middleware-Workshops/keycloak-workshop-labs.git`
+* *Git Repo URL*: `https://github.com/takahiro-ino/quarkus-workshop-m1m2-labs/tree/sso-4.14`
 
 image::ds-landing.png[ds, 800]
 

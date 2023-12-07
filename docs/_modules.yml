@@ -8,6 +8,8 @@ modules:
     name: Red Hat SSO インストール
   configuration:
     name: Red Hat SSO 設定
+  quarkusapp:
+    name: Quarkusアプリケーションのデプロイ
   firstapp:
     name: JavaScript Console アプリケーションのデプロイ
   openidconnect:
