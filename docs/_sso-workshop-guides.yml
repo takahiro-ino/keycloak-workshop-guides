@@ -22,5 +22,6 @@ modules:
   - preface
   - keycloak
   - configuration
+  - quarkusapp  
   - firstapp
   - openidconnect
