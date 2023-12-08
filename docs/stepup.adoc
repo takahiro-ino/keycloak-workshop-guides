@@ -8,13 +8,18 @@
 通常は、微妙に実装するのが手間になりますが、QuarkusにはOIDCの認証リダイレクトにクエリパラメータとして追加できるプロパティがあるため、その機能を利用して、ソースコードを変更せずに実現します。
 
 [#config-OTP]
-=== ステップアップ認証のためにワンタイムパスワード（OTP）の設定
+=== ステップアップ認証のためのワンタイムパスワード（OTP）の設定
 Red Hat SSO では、ワンタイムパスワード（OTP）が利用できます。
 具体的には、スマートフォンアプリのFreeOTPとGoogle Authenticatorが利用可能です。
 以降の手順では、スマートフォンに、FreeOTPとGoogle Authenticatorが必要なため、お手持ちのスマートフォンにいずれかをインストールしておく必要があります。
 
 ワンタイムパスワード（OTP）の設定を実施します。
 Red Hat SSOのアカウント管理画面から、 `Personal Info` をクリックしてください。
+
+なお、Red Hat SSOのアカウント管理画面は、以下のURLになります。
+
+* アカウント管理画面: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs/account
+
 
 image::sso_otp1.png[otp1]
 
@@ -57,4 +62,42 @@ image::sso_otp5.png[otp5]
 
 さて、これで Red Hat SSO サーバーのユーザ登録とOTPの設定ができました。
 
-@@@書きかけ
+[#config-sso]
+=== ステップアップ認証のための認証フローの設定
+Red Hat SSOでは、認証フローを `Authentication` でカスタマイズができます。
+
+ステップアップ認証用の認証フローを作っていきます。(画面操作がかなりあります)
+
+SSOの管理コンソールのAuthenticationの画面に移動します。下記のリンクからダイレクトに移動できます。
+
+*SSOの管理コンソール: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/admin/master/console/#/realms/demojs/authentication/flows
+
+`New` をクリックします。
+
+image::sso_steup01.png
+
+Create Top Level FormのAliasに `Stepup` と入力し、 `Save` をクリックします。
+
+image::sso_steup02.png
+
+自動でAuthenticationの画面に戻ります。Stepupフローの設定画面になっているので、 その画面から `Add execution` をクリックします。
+
+image::sso_steup03.png
+
+Providerのプルダウンリストから  `Cookie` を選択します。
+
+image::sso_steup04.png
+
+選択後、 `Save` をクリックします
+
+image::sso_steup05.png
+
+Authenticationの画面に、Cookieが追加されました。 Requiremnetを `Alternative` に変更します。
+
+image::sso_steup06.png
+
+最初の認証レベル(ユーザ名とパスワードのみ)のフローを設定します。
+
+
+
+
