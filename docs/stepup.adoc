@@ -95,12 +95,13 @@ image::sso_steup04.png[sso_steup04]
 image::sso_steup05.png[sso_steup05]
 
 
-Authenticationの画面に、Cookieが追加されました。 Requiremnetを `Alternative` に変更します。
+Authenticationの画面に、Cookieが追加されました。 Requirementを `Alternative` に変更します。
 
 image::sso_steup06.png[sso_steup06]
 
 最初の認証レベル(ユーザ名とパスワードのみ)のフローを設定します。
 
+@@途中です。。
 
 
 
