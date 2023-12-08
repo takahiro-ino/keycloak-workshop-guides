@@ -119,7 +119,7 @@ image::terminal2.png[terminal1, 800]
 
 OpenShiftの開発者者向け表示のトポロジーを確認すると、Quakursがデプロイされていることがわかります。
 
-image::quarkus_topology.png[terminal1, 800]
+image::quarkus_topology.png[quarkus_topology, 800]
 
 デプロイされたQuakursアプリケーションのエンドポイント/tokensにアクセスし、SSOができるかを確認します。
 下記のURLには、シークレットブラウザでアクセスしてください。(手順ミスが合った場合、ブラウザのCookieを削除しないといけない場合があるため)
