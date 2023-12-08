@@ -226,6 +226,59 @@ image::sso_stepup2-12.png[sso_stepup2-12]
 これで2つ目の認証レベル(OTPでの認証)のフローが設定されました。
 
 === ステップアップ認証のための認証フローの設定その3
+最後に、バインディングを変更します。
+バインディングとは、各処理(ブラウザでのユーザログインやユーザ登録等)で、どの認証フローを利用するかを関連付けするものです。
+ここでは、さきほど作成したStepupの認証フローをブラウザでのユーザログインに該当するBrowser Flowを関連付けます。
+
+Authentication画面の `Bindings` タブをクリックします。
+
+image::sso_binding1.png[sso_binding1]
+
+Browser Flowのプルダウンリストから  `Stepup` を選択します。
+
+image::sso_binding2.png[sso_binding2]
+
+選択後、 `Save` をクリックします
+
+image::sso_binding3.png[sso_binding3]
+
+=== ステップアップ認証のための認証フローの設定その4
+最後のRed Hat SSOの設定になります。
+ここまでの設定で、Authenticationでは、ACRでなくLoA(Level of Authentication)を設定しています。
+
+* LoAが1なら、ユーザとパスワード認証
+* LoAが2なら、OTP認証
+
+LoAは、数値で、ACRの文字列にマッピングすることで、アプリからの acr_values パラメーター(URLのクエリ等)でRH-SSOに要求できます。
+なぜ、こんな面倒くさいことをしているかというと、Red Hat SSOは様々なプロトコルに対応しており、LoAで抽象化して、LoAとOIDCの実装であるACRと紐付けることで、異なる認証認可プロトコル(SAML等)にも対応できるようにしています。
+
+今回は、以下のようにLoAとACRの文字列をマッピングします。
+
+* LoAが1なら、ACRはfirst
+* LoAが2なら、ACRはsecond
+
+実際に、LoAとACRのマッピングを実施します。マッピングはレルム単位やアプリ単位で実施可能ですが、今回は、レルム単位で実施します。
+
+`Realm Setting` -> `Loing` タブをクリックします。
+
+image::sso_acr1.png[sso_acr1]
+
+以下の項目を入力し、 `+` をクリックします。
+
+* LoA: fist
+* ACR : 1
+
+image::sso_acr2.png[sso_acr2]
+
+画面の入力項目が追加されたら、以下の項目を入力し、 `save` をクリックします。
+
+* LoA: second
+* ACR : 2
+
+image::sso_acr3.png[sso_acr3]
+
+=== Quarkusアプリケーションでのアクセス
+
 
 
 @@途中です。。
