@@ -85,7 +85,6 @@ image::sso_steup02.png[sso_steup02]
 
 image::sso_steup03.png[sso_steup03]
 
-
 Providerのプルダウンリストから  `Cookie` を選択します。
 
 image::sso_steup04.png[sso_steup04]
@@ -94,12 +93,11 @@ image::sso_steup04.png[sso_steup04]
 
 image::sso_steup05.png[sso_steup05]
 
-
 Authenticationの画面に、Cookieが追加されました。 Requirementを `Alternative` に変更します。
 
 image::sso_steup06.png[sso_steup06]
 
-最初の認証レベル(ユーザ名とパスワードのみ)のフローを設定します。
+1つ目の認証レベル(ユーザ名とパスワードのみ)のフローを設定します。
 
 画面から `Add flow` をクリックします。
 
@@ -117,6 +115,51 @@ image::sso_steup09.png[sso_steup09]
 1st Condition Flow の `Actions` をクリックし、 `Add execution` をクリックします。
 
 image::sso_steup10.png[sso_steup10]
+
+Create Authenticator Executionの画面で、 Providerのプルダウンリストから  `Conditional - Level Of Authentication` を選択します。
+
+image::sso_steup11.png[sso_steup11]
+
+選択後、 `Save` をクリックします
+
+image::sso_steup12.png[sso_steup12]
+
+Authenticationの画面に、Conditional - Level Of Authenticationが追加されました。 Requirementを `Required` に変更し、Requirementを必須にします。
+
+image::sso_steup13.png[sso_steup13]
+
+Conditional - Level Of Authentication の `Actions` をクリックし、 `Config` をクリックします。
+
+image::sso_steup14.png[sso_steup14]
+
+Create authenticator config画面で、以下の項目を入力し、 `save` をクリックします。
+
+* Alias: `Level 1`
+* Level of Authentication (LoA) : 1
+
+image::sso_steup15.png[sso_steup15]
+
+save が完了したら、 Stepupをクリックし、画面を戻します。
+
+image::sso_steup16.png[sso_steup16]
+
+1st Condition Flow の `Actions` をクリックし、 `Add execution` をクリックします。
+
+image::sso_steup17.png[sso_steup17]
+
+Create Authenticator Executionの画面で、 Providerのプルダウンリストから  `Usernmae Password Form` を選択します。
+
+image::sso_steup18.png[sso_steup18]
+
+選択後、 `Save` をクリックします
+
+image::sso_steup19.png[sso_steup19]
+
+Authenticationの画面に、Usernmae Password Form追加されました。 
+
+これで1つ目の認証レベル(ユーザ名とパスワードのみ)のフローが設定されました。
+
+image::sso_steup20.png[sso_steup20]
 
 
 
