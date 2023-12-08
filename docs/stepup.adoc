@@ -76,7 +76,7 @@ SSOの管理コンソールのAuthenticationの画面に移動します。下記
 
 image::sso_steup01.png[sso_steup01]
 
-Create Top Level FormのAliasに `Stepup` と入力し、 `Save` をクリックします。
+Create Top Level Form画面のAliasに `Stepup` と入力し、 `Save` をクリックします。
 
 image::sso_steup02.png[sso_steup02]
 
@@ -100,6 +100,26 @@ Authenticationの画面に、Cookieが追加されました。 Requirementを `A
 image::sso_steup06.png[sso_steup06]
 
 最初の認証レベル(ユーザ名とパスワードのみ)のフローを設定します。
+
+画面から `Add flow` をクリックします。
+
+image::sso_steup07.png[sso_steup07]
+
+
+Create Execution Flow画面のAliasに `1st Condition Flow` と入力し、 `Save` をクリックします。
+
+image::sso_steup08.png[sso_steup08]
+
+Authenticationの画面に、 1st Condition Flow が追加されました。 Requirementを `Conditional` に変更します。
+
+image::sso_steup09.png[sso_steup09]
+
+1st Condition Flow の `Actions` をクリックし、 `Add execution` をクリックします。
+
+image::sso_steup10.png[sso_steup10]
+
+
+
 
 @@途中です。。
 
