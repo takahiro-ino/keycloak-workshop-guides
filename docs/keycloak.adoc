@@ -19,11 +19,11 @@ Red Hat SSO のインストールを実施します。
 <1> 左メニュー上の `開発者向け表示` をクリックします。(最初から、開発者向け表示の場合、本操作は不要です)
 <2> 左メニューの `+追加` をクリックし、 Red Hat SSO インストール先のプロジェクトとして '{{ USER_ID }}-keycloak' を選択します。
 <3> `開発者カタログ` から `すべてのサービス` をクリックします。
-<4> 検索ボックスに `SSO` と入力します。
+<4> 検索ボックスに `sso` と入力します。
 
 image::OpenShift-sso_search.png[Search for SSO]
 
-<4>  `Red Hat Single Sign-On 7.5 on OpenJDK (Ephemeral)` をクリックします。
+<4>  `Red Hat Single Sign-On 7.6 on OpenJDK (Ephemeral) for OpenShift 4.X` をクリックします。
 
 <5> `テンプレートのインスタンス化` をクリックします。これにより、初期設定画面が表示されます。
 この画面では、Red Hat SSO に設定できる初期パラメータを表しています。
