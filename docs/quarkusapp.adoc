@@ -89,11 +89,10 @@ Red Hat SSO 管理画面の左のメニューバーから `Clients` をクリッ
 
 image::sso_quarkus1.png[sso_quarkus1, 800]
 
-Add Client画面にて、以下の項目を入力し、 save をクリックします。 Quarkus アプリケーションのURLには、 "http://" を先頭につけます。
+Add Client画面にて、以下の項目を入力し、 `save` をクリックします。 Quarkus アプリケーションのURLには、 "http://" を先頭につけます。
 
 * Cliend ID: quarkus
-* Root URL: http://js-console-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}"
-http://people-{{ USER_ID }}-keycloak.apps.{{ ROUTE_SUBDOMAIN }}/
+* Root URL: http://people-{{ USER_ID }}-keycloak.apps.{{ ROUTE_SUBDOMAIN }}/
 
 image::sso_quarkus2.png[sso_quarkus2, 800]
 
