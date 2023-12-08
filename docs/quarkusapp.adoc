@@ -93,7 +93,7 @@ image::sso_quarkus1.png[sso_quarkus1, 800]
 Add Client画面にて、以下の項目を入力し、 `save` をクリックします。 Quarkus アプリケーションのURLには、 "http://" を先頭につけます。
 
 * Cliend ID: quarkus
-* Root URL: http://people-{{ USER_ID }}-keycloak.apps.{{ ROUTE_SUBDOMAIN }}/
+* Root URL: http://people-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/
 
 image::sso_quarkus2.png[sso_quarkus2, 800]
 
@@ -124,7 +124,7 @@ image::quarkus_topology.png[quarkus_topology, 800]
 デプロイされたQuakursアプリケーションのエンドポイント/tokensにアクセスし、SSOができるかを確認します。
 下記のURLには、シークレットブラウザでアクセスしてください。(手順ミスが合った場合、ブラウザのCookieを削除しないといけない場合があるため)
 
-* http://people-{{ USER_ID }}-keycloak.apps.{{ ROUTE_SUBDOMAIN }}/tokens
+* http://people-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/tokens
 
 
 
