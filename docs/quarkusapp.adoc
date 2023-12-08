@@ -54,15 +54,48 @@ public class TokenResource {
 ----
 
 ## Quarkusアプリ側の設定
-まず、Quarkusアプリ側にOIDC連携するRed Hat SSOのURLを指定する必要があります。
+Quarkusアプリ側にOIDC連携するRed Hat SSOのURLを指定する必要があります。
 これは、Quarkusの定義ファイルである `application.properties` の `quarkus.oidc.auth-server-url` プロパティに指定します。
 
-＠＠＠
+`application.properties` ファイルは下図の箇所から編集できます。
 
+image::application-properties.png[cdw, 800]
+
+`quarkus.oidc.auth-server-url` をSSOサーバのURLに変更します。
+
+quarkus.oidc.auth-server-url=https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs
+
+
+修正後の定義ファイルは以下のようになります。
+
+[source, js,role="copypaste"]
+----
+# For OIDC extension
+quarkus.oidc.auth-server-url=https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs
+quarkus.oidc.client-id=quarkus
+quarkus.oidc.application-type=web-app
+quarkus.keycloak.devservices.realm-path=quarkus-realm.json
+quarkus.http.auth.permission.authenticated.paths=/*
+quarkus.http.auth.permission.authenticated.policy=authenticated
+quarkus.oidc.token-state-manager.split-tokens=true
+quarkus.oidc.token-state-manager.strategy=id-refresh-tokens
+----
 
 ## Red Hat SSO側の設定
 Red Hat SSO側に、Quarkusアプリの登録を行います。
-＠＠＠
+
+Red Hat SSO 管理画面の左のメニューバーから `Clients` をクリックします。(認証認可の世界では、シングルサインオンで連携するアプリケーションことを Client と呼びます)
+次に、`Create` ボタンをクリックします。
+
+image::sso_quarkus1.png[sso_quarkus1, 800]
+
+Add Client画面にて、以下の項目を入力し、 save をクリックします。 Quarkus アプリケーションのURLには、 "http://" を先頭につけます。
+
+* Cliend ID: quarkus
+* Root URL: http://js-console-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}"
+http://people-{{ USER_ID }}-keycloak.apps.{{ ROUTE_SUBDOMAIN }}/
+
+image::sso_quarkus2.png[sso_quarkus2, 800]
 
 
 ## QuarkusアプリケーションのビルドとOpenShiftへのデプロイ
