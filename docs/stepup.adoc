@@ -70,31 +70,34 @@ Red Hat SSOでは、認証フローを `Authentication` でカスタマイズが
 
 SSOの管理コンソールのAuthenticationの画面に移動します。下記のリンクからダイレクトに移動できます。
 
-*SSOの管理コンソール: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/admin/master/console/#/realms/demojs/authentication/flows
+* SSOの管理コンソール: https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/admin/master/console/#/realms/demojs/authentication/flows
 
 `New` をクリックします。
 
-image::sso_steup01.png
+image::sso_steup01.png[sso_steup01]
 
 Create Top Level FormのAliasに `Stepup` と入力し、 `Save` をクリックします。
 
-image::sso_steup02.png
+image::sso_steup02.png[sso_steup02]
+
 
 自動でAuthenticationの画面に戻ります。Stepupフローの設定画面になっているので、 その画面から `Add execution` をクリックします。
 
-image::sso_steup03.png
+image::sso_steup03.png[sso_steup03]
+
 
 Providerのプルダウンリストから  `Cookie` を選択します。
 
-image::sso_steup04.png
+image::sso_steup04.png[sso_steup04]
 
 選択後、 `Save` をクリックします
 
-image::sso_steup05.png
+image::sso_steup05.png[sso_steup05]
+
 
 Authenticationの画面に、Cookieが追加されました。 Requiremnetを `Alternative` に変更します。
 
-image::sso_steup06.png
+image::sso_steup06.png[sso_steup06]
 
 最初の認証レベル(ユーザ名とパスワードのみ)のフローを設定します。
 
