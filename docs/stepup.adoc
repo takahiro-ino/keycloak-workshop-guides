@@ -1,0 +1,60 @@
+[#intro]
+この章では、QuakrusとRed Hat SSOを用いてステップアップ認証を実装してみます。
+ステップアップ認証は、WebアプリやAPIで、参照の場合はログイン認証のみで、更新の場合はログイン認証+OTPやWebAuthを使った生体認証などができるようになります。
+インターネットバンキングで、振り込みする際に追加で認証情報を求められることがあると思いますが、それがまさしくステップアップ認証になります。
+
+ステップアップ認証は、OIDCのACR(Authentication Context Class Reference)を利用しています。
+アプリ側で実装する場合は、アプリ側で該当するOIDCのクレームで必要とする値がない場合は、認証リダイレクトにそのクレーム頂戴というクエリを追加する必要があります。
+通常は、微妙に実装するのが手間になりますが、QuarkusにはOIDCの認証リダイレクトにクエリパラメータとして追加できるプロパティがあるため、その機能を利用して、ソースコードを変更せずに実現します。
+
+[#config-OTP]
+=== ステップアップ認証のためにワンタイムパスワード（OTP）の設定
+Red Hat SSO では、ワンタイムパスワード（OTP）が利用できます。
+具体的には、スマートフォンアプリのFreeOTPとGoogle Authenticatorが利用可能です。
+以降の手順では、スマートフォンに、FreeOTPとGoogle Authenticatorが必要なため、お手持ちのスマートフォンにいずれかをインストールしておく必要があります。
+
+ワンタイムパスワード（OTP）の設定を実施します。
+Red Hat SSOのアカウント管理画面から、 `Personal Info` をクリックしてください。
+
+image::sso_otp1.png[otp1]
+
+Personal Info画面の左ペインから、 `Account Security` をクリックし、さらに `Signing In` をクリックし、
+Signing In画面の `Set up Autehnticator Application` をクリックします。
+
+image::sso_otp2.png[otp2]
+
+[NOTE]
+====
+下記のページが表示された場合は、さきほど入力したユーザ名とパスワードを入力し、`Sing in` をクリックしてください。
+
+image::sso_otp2-1.png[otp2-1]
+====
+
+以下のようにQRコードが画面に表示されます。お手持ちのスマートフォンのFreeOTPとGoogle Authenticatorから、QRコードをスキャンします。
+
+image::sso_otp3.png[otp3]
+
+以下は、FreeOTPでの操作となります。
+FreeOTPを起動し、QRスキャンボタンを押します。
+
+image::free_otp1.png[free_otp1, 400]
+
+スマートフォンでRH-SSOの画面のQRコードをスキャンし、いくつかボタンを押すと、FreeOTPにレルム名(demojs)で登録されます。
+
+image::free_otp2.png[free_otp2, 400]
+
+スマートフォンのFreeOTPに登録されたレルム名(demojs)をクリックすると、ワンタイムパスワードが表示されます。
+
+image::free_otp3.png[free_otp3, 400]
+
+スマートフォンのFreeOTPで表示されたワンタイムパスワードとデバイス名(何でも良い)をRH-SSOの画面に入力し、 `Submit` をクリックし、登録します。
+
+image::sso_otp4.png[otp4]
+
+登録が完了すると、Personal Info画面でさきほど入力したデバイス名で、登録されていることがわかります。
+
+image::sso_otp5.png[otp5]
+
+さて、これで Red Hat SSO サーバーのユーザ登録とOTPの設定ができました。
+
+@@@書きかけ

@@ -23,5 +23,5 @@ modules:
   - keycloak
   - configuration
   - quarkusapp  
-  - firstapp
-  - openidconnect
+  - setup  
+

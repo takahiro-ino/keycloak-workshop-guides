@@ -10,8 +10,6 @@ modules:
     name: Red Hat SSO 設定
   quarkusapp:
     name: Quarkusアプリケーションのデプロイ
-  firstapp:
-    name: JavaScript Console アプリケーションのデプロイ
-  openidconnect:
-    name: OpenID Connect 認可コードフローの理解
+  stepup:
+    name: ステップアップ認証
 
