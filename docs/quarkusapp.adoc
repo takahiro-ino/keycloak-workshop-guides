@@ -68,7 +68,7 @@ quarkus.oidc.auth-server-url=https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMA
 
 修正後の定義ファイルは以下のようになります。
 
-[source, js,role="copypaste"]
+[source, bash,role="copypaste"]
 ----
 # For OIDC extension
 quarkus.oidc.auth-server-url=https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs
@@ -79,12 +79,13 @@ quarkus.http.auth.permission.authenticated.paths=/*
 quarkus.http.auth.permission.authenticated.policy=authenticated
 quarkus.oidc.token-state-manager.split-tokens=true
 quarkus.oidc.token-state-manager.strategy=id-refresh-tokens
+〜〜
 ----
 
 ## Red Hat SSO側の設定
 Red Hat SSO側に、Quarkusアプリの登録を行います。
 
-Red Hat SSO 管理画面の左のメニューバーから `Clients` をクリックします。(認証認可の世界では、シングルサインオンで連携するアプリケーションことを Client と呼びます)
+Red Hat SSO 管理画面の左のメニューバーから `Clients` をクリックします。(認証認可の世界では、シングルサインオンで連携するアプリケーションを Client と呼びます)
 次に、`Create` ボタンをクリックします。
 
 image::sso_quarkus1.png[sso_quarkus1, 800]
@@ -98,10 +99,33 @@ image::sso_quarkus2.png[sso_quarkus2, 800]
 
 
 ## QuarkusアプリケーションのビルドとOpenShiftへのデプロイ
+Quakursは、コンテナ化作成やOpenShiftのデプロイを簡単にできるようになっており、今回はそれらの機能を使って、一気にコンテナを作成し、OpenShiftのデプロイまで実行します。
+
 開発環境に戻り、下記の手順で、ターミナルの起動を起動します。
 
-
 image::terminal1.png[terminal1, 800]
+
+開発環境のターミナルから、以下のコマンドを用いて OpenShiftのRed Hat SSOがデプロイされているプロジェクトに、Quarkusアプリもデプロイします。
+
+[source, bash,role="copypaste"]
+----
+oc project {{ USER_ID }}-keycloak
+mvn clean package -DskipTests -Dquarkus.container-image.group={{ USER_ID }}-keycloak
+----
+
+ビルドおよびOpenShiftのデプロイが完了すると、ターミナルには以下のように表示されます。
+
+image::terminal2.png[terminal1, 800]
+
+OpenShiftの開発者者向け表示のトポロジーを確認すると、Quakursがデプロイされていることがわかります。
+
+image::quarkus_topology.png[terminal1, 800]
+
+デプロイされたQuakursアプリケーションのエンドポイント/tokensにアクセスし、SSOができるかを確認します。
+下記のURLには、シークレットブラウザでアクセスしてください。(手順ミスが合った場合、ブラウザのCookieを削除しないといけない場合があるため)
+
+* http://people-{{ USER_ID }}-keycloak.apps.{{ ROUTE_SUBDOMAIN }}/tokens
+
 
 
 @@@@@ ここは過去のデータ
