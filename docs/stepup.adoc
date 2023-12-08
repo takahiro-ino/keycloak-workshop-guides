@@ -63,7 +63,7 @@ image::sso_otp5.png[otp5]
 さて、これで Red Hat SSO サーバーのユーザ登録とOTPの設定ができました。
 
 [#config-sso]
-=== ステップアップ認証のための認証フローの設定
+=== ステップアップ認証のための認証フローの設定その１
 Red Hat SSOでは、認証フローを `Authentication` でカスタマイズができます。
 
 ステップアップ認証用の認証フローを作っていきます。(画面操作がかなりあります)
@@ -102,7 +102,6 @@ image::sso_steup06.png[sso_steup06]
 画面から `Add flow` をクリックします。
 
 image::sso_steup07.png[sso_steup07]
-
 
 Create Execution Flow画面のAliasに `1st Condition Flow` と入力し、 `Save` をクリックします。
 
@@ -155,13 +154,78 @@ image::sso_steup18.png[sso_steup18]
 
 image::sso_steup19.png[sso_steup19]
 
-Authenticationの画面に、Usernmae Password Form追加されました。 
+Authenticationの画面に、Usernmae Password Formが追加されました。 
 
 これで1つ目の認証レベル(ユーザ名とパスワードのみ)のフローが設定されました。
 
 image::sso_steup20.png[sso_steup20]
 
+=== ステップアップ認証のための認証フローの設定その2
 
+2つ目の認証レベル(OTPでの認証)のフローを設定します。
+
+画面から `Add flow` をクリックします。
+
+image::sso_stepup2-01.png[sso_stepup2-01]
+
+Create Execution Flow画面のAliasに `2nd Condition Flow` と入力し、 `Save` をクリックします。
+
+image::sso_stepup2-02.png[sso_stepup2-02]
+
+Authenticationの画面に、 2nd Condition Flow が追加されました。 Requirementを `Conditional` に変更します。
+
+image::sso_stepup2-03.png[sso_stepup2-03]
+
+2nd Condition Flow の `Actions` をクリックし、 `Add execution` をクリックします。
+
+image::sso_stepup2-04.png[sso_stepup2-04]
+
+Create Authenticator Executionの画面で、 Providerのプルダウンリストから  `Conditional - Level Of Authentication` を選択します。
+
+image::sso_steup11.png[sso_steup11]
+
+選択後、 `Save` をクリックします
+
+image::sso_steup12.png[sso_steup12]
+
+Authenticationの画面に、Conditional - Level Of Authenticationが追加されました。 Requirementを `Required` に変更し、Requirementを必須にします。
+
+image::sso_stepup2-05.png[sso_stepup2-05]
+
+Conditional - Level Of Authentication の `Actions` をクリックし、 `Config` をクリックします。
+
+image::sso_stepup2-06.png[sso_stepup2-06]
+
+Create authenticator config画面で、以下の項目を入力し、 `save` をクリックします。
+
+* Alias: `Level 2`
+* Level of Authentication (LoA) : 2
+
+image::sso_stepup2-07.png[sso_stepup2-07]
+
+save が完了したら、 Stepupをクリックし、画面を戻します。
+
+image::sso_stepup2-08.png[sso_stepup2-08]
+
+2nd Condition Flow の `Actions` をクリックし、 `Add execution` をクリックします。
+
+image::sso_stepup2-09.png[sso_stepup2-09]
+
+Create Authenticator Executionの画面で、 Providerのプルダウンリストから  `Usernmae Password Form` を選択します。
+
+image::sso_stepup2-10.png[sso_stepup2-10]
+
+選択後、 `Save` をクリックします
+
+image::sso_stepup2-11.png[sso_stepup2-11]
+
+Authenticationの画面に、OTPが追加されました。  Requirementを `Required` に変更し、Requirementを必須にします。
+
+image::sso_stepup2-12.png[sso_stepup2-12]
+
+これで2つ目の認証レベル(OTPでの認証)のフローが設定されました。
+
+=== ステップアップ認証のための認証フローの設定その3
 
 
 @@途中です。。
