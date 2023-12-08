@@ -115,7 +115,7 @@ mvn clean package -DskipTests -Dquarkus.container-image.group={{ USER_ID }}-keyc
 
 ビルドおよびOpenShiftのデプロイが完了すると、ターミナルには以下のように表示されます。
 
-image::terminal2.png[terminal1, 800]
+image::terminal2.png[terminal2, 800]
 
 OpenShiftの開発者者向け表示のトポロジーを確認すると、Quakursがデプロイされていることがわかります。
 
@@ -126,127 +126,16 @@ image::quarkus_topology.png[quarkus_topology, 800]
 
 * http://people-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/tokens
 
+アクセスすると、Red Hat SSOにリダイレクトされて、認証フォームが表示されます。
+認証フォームにユーザとパスワードを入力して、 `Sign in` をクリックしてください。
+
+(もし、アクセスが失敗した場合は、URLがhttp://になっているかを確認ください。ブラウザがhttps://に変換する場合があります)
+
+image::confirm_quarkus_sso1.png[confirm_quarkus_sso1, 800]
+
+ログインに成功すると、アクセストークンから取得したユーザ情報が表示されます。
+
+image::confirm_quarkus_sso2.png[confirm_quarkus_sso2, 800]
 
 
-@@@@@ ここは過去のデータ
-image::gitclonepage.png[cdw, 600, align="center"]
-
-レポジトリURLには下記のURLをコピー&ペーストして、Enter キーまたは return キーを押下することにより、任意のフォルダ配下にプロジェクトをインポートしてください。
-
-[source, shell, role="copypaste"]
-----
-https://github.com/RedHat-Middleware-Workshops/keycloak-workshop-labs
-
-----
-
-image::gitclone.png[crw, 600, align="center"]
-
-これで、プロジェクトがワークスペースにインポートされました。
-
-
-[#firstapp-authentication]
-=== JavaScirptによる認証
-シングルサインオンを実現するには、JavaScript Console アプリケーション側に Red Hat SSO のURLを設定する必要があります。
-
-前節において「メール連携の設定 (オプション)」を実施していない場合には、開発環境 (Red Hat CodeReady Workspace) の画面の右側にあるワークベンチアイコンをクリックし、ターミナルを立ち上げます。
-
-image::crw_right_workbench.png[Workbench]
-
-1.  `Login to OpenShift` をクリックします。
-2.  `New Terminal` をクリックします。
-
-Red Hat SSO サーバーのURLをコピーしておきます。OpenShiftのコマンドで Red Hat SSO サーバーのホスト名は取得できます。
-```
-> oc get route sso
-NAME   HOST/PORT                                              PATH   SERVICES   
-sso    sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}       sso        <all>
-```
-
-開発環境の画面から `js-console/src/keycloak.json` ファイルを編集します。
-
-以下の "auth-server-url" をSSOサーバのURLに変更します。
-[source, js,role="copypaste"]
-----
-{
-  "realm" : "demojs",
-  "auth-server-url" : "https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth",
-  "resource" : "js-console"
-}
-
-----
-
-次に、 `js-console/src/index.html` を開き、<header> <src>の SERVER_URL の部分を置き換えます。
-
-サーバーのURLは、以下のようになります。
-
-[source, js,role="copypaste"]
-----
-
-    <script src="https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/js/keycloak.js"></script>
-
-----
-
-基本的な設定ができたので、JavaScript Console アプリケーションを OpenShift 上にデプロイしていきます。
-OpenShift の S2I（Source-to-Image）という機能を使って、ソースコードから JavaScirpt アプリケーションが格納されたコンテナを作成します。また、OpenShiftでデフォルトで提供されている httpd(Apache HTTP Server) のコンテナイメージに、今回の JavaScript Console アプリケーションを格納しています。
-
-開発環境のターミナルから、以下のコマンドを用いて `js-console/src` ディレクトリに移動し、コンテナイメージをビルドするためのビルド定義を作成します。
-
-[source, bash,role="copypaste"]
-----
-cd js-console/src
-oc new-build --name js-console --binary --strategy source --image-stream httpd
-----
-
-ビルドを開始します。以下のコマンドでは `js-console/src` ディレクトリ配下のファイルをビルドしています。
-
-[source, bash,role="copypaste"]
-----
-oc start-build js-console --from-dir . --follow
-----
-
-ビルドが成功したら、作成されたコンテナイメージを用いてアプリケーションをデプロイします。
-
-[source, bash,role="copypaste"]
-----
-oc new-app --image-stream=js-console:latest
-----
-
-そして、最後にデプロイされた JavaScript Console アプリケーションを OpenShift クラスタ外のネットワークからアクセス可能にし、ブラウザからアクセスできるようにします。
-
-[source, bash,role="copypaste"]
-----
-oc expose svc/js-console
-----
-
-[#firstapp-deployment]
-
-image::OpenShift-first-deployment.png[First deployment, 1024]
-
-OpenShiftコンソール上で、`js-console` が表示されるはずです。
-アイコンの右上の「URLを開く」をクリックすると、エラーになっていまいます。もう少し設定を行う必要があります。お気付きかもしれませんが、JavaScript Console アプリケーションの Red Hat SSO 側の設定まだしていないためです。次に Red Hat SSO 側の設定をしていきます。
-
-設定には、JavaScript アプリケーションのURLが必要になります。開発環境の画面のターミナルから、次のコマンドで取得します。
-
-[source, bash,role="copypaste"]
-----
-oc get route js-console
-----
-
-Red Hat SSO 管理画面の左のメニューバーから `Clients` をクリックします。(認証認可の世界では、シングルサインオンで連携するアプリケーションことを Client と呼びます)
-次に、`Create` ボタンをクリックします。
-
-フォームに必要事項を入力し（例：以下の画面）、 `save` をクリックします。
-JavaScript Console アプリケーションのURLには、 "http://" を先頭につけてください。
-(例: "http://js-console-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}" )
-
-image::sso_adminclientconfig.png[Realm Client settings]
-
-JavaScript Console アプリケーションを再読み込みしてください。ログインページにリダイレクトされるはずです。
-ユーザー登録したユーザー名・パスワードを用いてログインすると、次のコンソールが表示され、登録したユーザー名が表示されます。
-JavaScript Console アプリケーション上にある `Access Token` `Access JSON Token` をクリックしてください。
-Access Tokenは、 Red Hat SSO から取得したアクセストークンになります。
-Access JSON Tokenは、アクセストークンをbase64デコードした JWT (Json Web Token) の内容になります。
-
-image::sso_demojsconsole.png[JS Console]
-
-これで、JavaScript Console アプリケーションに対して、Red Hat SSO を用いてシングルサインオンを実現することができました。
+これで、Quarkus アプリケーションに対して、Red Hat SSO を用いてシングルサインオンを実現することができました。
