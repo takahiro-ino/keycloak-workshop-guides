@@ -23,5 +23,5 @@ modules:
   - keycloak
   - configuration
   - quarkusapp  
-  - setup  
+  - stepup  
 
