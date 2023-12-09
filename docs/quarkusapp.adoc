@@ -7,7 +7,7 @@ Quarkusは、OIDC連携するためのエクステンションであるoidcエ�
 [#firstapp-gitclone]
 === 開発環境の確認
 開発環境のブラウザまたはタブに移動します。
-( 開発環境を閉じている場合、 {{ CHE_URL }}[ここから^] にアクセスしてください。 )
+( 開発環境を閉じている場合、 {{ CHE_URL }}[ここから^] アクセスしてください。 )
 
 この開発環境は、OpenShift DevSpacesでEclipse Cheをベースにしています。
  (Eclipse Che は MicroSoft VS CodeベースにしたWebブラウザで動作するソフトウェアです)
@@ -57,7 +57,7 @@ public class TokenResource {
 Quarkusアプリ側にOIDC連携するRed Hat SSOのURLを指定する必要があります。
 これは、Quarkusの定義ファイルである `application.properties` の `quarkus.oidc.auth-server-url` プロパティに指定します。
 
-`application.properties` ファイルは下図の箇所から編集できます。
+`application.properties` ファイルは、 プロジェクト ツリーで src → main → resources → application.properties から編集できます。
 
 image::application-properties.png[cdw, 800]
 
