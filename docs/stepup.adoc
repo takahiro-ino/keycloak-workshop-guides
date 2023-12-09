@@ -371,6 +371,13 @@ image::quarkus_acr_4.png[quarkus_acr_4, 800]
 
 image::confirm_quarkus_sso2.png[confirm_quarkus_sso2, 800]
 
+以上で、ステップアップ認証は完了となります。今回のプロパティ定義で用いたacr_valuesのクエリ追加は、Quarkusアプリケーション全体に適用されてしまいますが、
+マイクロサービスとして、参照Quarkusアプリ、更新Quarkusアプリを分けて、更新Quarkusアプリに今回のプロパティ定義を利用するなどの用途ですと、かなり実装コストを下げれるのではないかと思います。
+
+
+
+
+
 
 
 
