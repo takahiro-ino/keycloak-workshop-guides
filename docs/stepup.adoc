@@ -265,15 +265,15 @@ image::sso_acr1.png[sso_acr1]
 
 以下の項目を入力し、 `+` をクリックします。
 
-* LoA: fist
-* ACR : 1
+* ACR: first
+* LoA : 1
 
 image::sso_acr2.png[sso_acr2]
 
 画面の入力項目が追加されたら、以下の項目を入力し、 `save` をクリックします。
 
-* LoA: second
-* ACR : 2
+* ACR: second
+* LoA : 2
 
 image::sso_acr3.png[sso_acr3]
 
