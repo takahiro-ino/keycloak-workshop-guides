@@ -254,8 +254,8 @@ LoAは、数値で、ACRの文字列にマッピングすることで、アプ�
 
 今回は、以下のようにLoAとACRの文字列をマッピングします。
 
-* LoAが1なら、ACRはfirst
-* LoAが2なら、ACRはsecond
+* LoAが1なら、ACRはfirst (ユーザとパスワード認証)
+* LoAが2なら、ACRはsecond (ユーザとパスワード認証 + OTP　認証)
 
 実際に、LoAとACRのマッピングを実施します。マッピングはレルム単位やアプリ単位で実施可能ですが、今回は、レルム単位で実施します。
 
@@ -278,10 +278,99 @@ image::sso_acr2.png[sso_acr2]
 image::sso_acr3.png[sso_acr3]
 
 === Quarkusアプリケーションでのアクセス
+Quarkusアプリケーションで、挙動を確認します。
+Red Hat SSOの認証フロー設定では、上から順に処理をしていくため、特に、ACRを設定しない場合は、LoAが1の場合(ACRがfirst)→ユーザとパスワード認証になります。
+まずは、LoAが1の場合(ACRがfirst)→ユーザとパスワード認証になっているかを確認します。
+
+下記のURLには、シークレットブラウザでアクセスしてください。また、シークレットブラウザが起動している場合は一旦落としてください。(手順ミスが合った場合、ブラウザのCookieを削除しないといけない場合があるため)
+
+* http://people-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/tokens
+
+image::confirm_quarkus_sso1.png[confirm_quarkus_sso1, 800]
+
+ログインに成功すると、アクセストークンから取得したユーザ情報が表示されます。
+
+image::confirm_quarkus_sso2.png[confirm_quarkus_sso2, 800]
+
+次に、LoAが2の場合(ACRがsecond)→ユーザとパスワード認証 + OTP認証を確認します。
+
+これは、Quarkusの定義ファイルである `application.properties` の `quarkus.oidc.authentication.extra-params.<追加したいクエリ>=<追加したいクエリバリュー>` プロパティにを利用します。
+
+quarkus.oidc.authentication.extra-paramsは、認証リダイレクトにクエリパラメータとして追加できるプロパティです。
+quarkus.oidc.authentication.extra-params.<追加したいクエリ>=<追加したいクエリバリュー>` とすると、QuarkusアプリからRed Hat SSOの認証リダイレクトのクエリに 〜省略〜&<追加したいクエリ>=<追加したいクエリバリュー>が追加されます。
+
+では、実際に追加していきます。
+
+`application.properties` ファイルは、 プロジェクト ツリーで src → main → resources → application.properties から編集できます。
+
+image::application-properties.png[cdw, 800]
+
+以下のパラメータを追加します。
+
+* quarkus.oidc.authentication.extra-params.acr_values=second
+
+(上記の設定で、認証リダイレクトのクエリに　〜省略〜&acr_values=secondが追加されます。)
+
+修正後の定義ファイルは以下のようになります。
+
+[source, bash,role="copypaste"]
+----
+# For OIDC extension
+quarkus.oidc.auth-server-url=https://sso-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/auth/realms/demojs
+quarkus.oidc.client-id=quarkus
+quarkus.oidc.application-type=web-app
+quarkus.keycloak.devservices.realm-path=quarkus-realm.json
+quarkus.http.auth.permission.authenticated.paths=/*
+quarkus.http.auth.permission.authenticated.policy=authenticated
+quarkus.oidc.token-state-manager.split-tokens=true
+quarkus.oidc.token-state-manager.strategy=id-refresh-tokens
+
+quarkus.oidc.authentication.extra-params.acr_values=second
+
+# For logging
+quarkus.log.level=TRACE
+〜〜
+----
+
+image::quarkus_acr_1.png[quarkus_acr_1, 800]
+
+開発環境のターミナルから、以下のコマンドを用いて Quarkusアプリのビルドと再デプロイをします。
+
+[source, bash,role="copypaste"]
+----
+oc project {{ USER_ID }}-keycloak
+mvn clean package -DskipTests -Dquarkus.container-image.group={{ USER_ID }}-keycloak
+----
+
+Quarkusアプリのビルドと再デプロイが完了したら、下記のURLには、シークレットブラウザでアクセスしてください。また、シークレットブラウザが起動している場合は一旦落としてください。(手順ミスが合った場合、ブラウザのCookieを削除しないといけない場合があるため)
+
+* http://people-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/tokens
 
 
+下記のURLには、シークレットブラウザでアクセスしてください。また、シークレットブラウザが起動している場合は一旦落としてください。(手順ミスが合った場合、ブラウザのCookieを削除しないといけない場合があるため)
 
-@@途中です。。
+* http://people-{{ USER_ID }}-keycloak.{{ ROUTE_SUBDOMAIN }}/tokens
+
+以下のユーザとパスワードのフォーム認証画面が開きます。折角なので、Red Hat SSOにリダイレクトされたURLを確認してみます。ブラウザのURLをメモ帳などにコピーしてください。
+
+image::quarkus_acr_2.png[quarkus_acr_2, 800]
+
+URLの最後に `acr_values=second`が追加されていることがわかります。
+
+https://sso-user1-keycloak.apps.cluster-rqbqf.rqbqf.sandbox2593.opentlc.com/auth/realms/demojs/protocol/openid-connect/auth?response_type=code&client_id=quarkus&scope=openid&redirect_uri=http%3A%2F%2Fpeople-user1-keycloak.apps.cluster-rqbqf.rqbqf.sandbox2593.opentlc.com%2Ftokens&state=3dc6d5cb-5283-4650-901e-0a4509549f10& `acr_values=second`
+
+シークレットブラウザに戻り、ユーザとパスワードのフォーム認証画面の項目を入力し、 `Sign in` をクリックします。
+ 
+image::quarkus_acr_3.png[quarkus_acr_3, 800]
+
+次に、OTP認証フォームに移動します。お手持ちのスマートフォンのOTPアプリからOTPを入力してください。
+
+image::quarkus_acr_4.png[quarkus_acr_4, 800]
+
+ログインに成功すると、アクセストークンから取得したユーザ情報が表示されます。
+
+image::confirm_quarkus_sso2.png[confirm_quarkus_sso2, 800]
+
 
 
 
