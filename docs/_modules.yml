@@ -12,4 +12,6 @@ modules:
     name: Quarkusアプリケーションのデプロイ
   stepup:
     name: ステップアップ認証
+  jsadapter:
+    name: JavaScriptアプリのデプロイ
 

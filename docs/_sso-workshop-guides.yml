@@ -24,4 +24,6 @@ modules:
   - configuration
   - quarkusapp  
   - stepup  
+  - jsadapter
+  
 
